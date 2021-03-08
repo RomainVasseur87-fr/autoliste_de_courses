@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -27,6 +28,9 @@ public class Type {
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "type_droits", joinColumns = @JoinColumn(name = "type.id"), inverseJoinColumns = @JoinColumn(name = "droit_id"))
 	private List<Droit> droits = new ArrayList<Droit>();
+	@OneToMany(mappedBy = "type", fetch = FetchType.LAZY)
+	private List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
+	
 	
 	public Type() {
 		super();
@@ -86,6 +90,16 @@ public class Type {
 
 	public void setDroits(List<Droit> droits) {
 		this.droits = droits;
+	}
+
+
+	public List<Utilisateur> getUtilisateurs() {
+		return utilisateurs;
+	}
+
+
+	public void setUtilisateurs(List<Utilisateur> utilisateurs) {
+		this.utilisateurs = utilisateurs;
 	}
 
 	

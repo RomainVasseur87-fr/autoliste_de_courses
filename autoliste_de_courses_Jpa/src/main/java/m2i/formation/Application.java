@@ -19,7 +19,6 @@ import m2i.formation.dao.jpa.MagasinDaoJpa;
 import m2i.formation.dao.jpa.PanierDaoJpa;
 import m2i.formation.dao.jpa.ProduitDaoJpa;
 
-
 public class Application {
 	private static Application instance = null;
 
