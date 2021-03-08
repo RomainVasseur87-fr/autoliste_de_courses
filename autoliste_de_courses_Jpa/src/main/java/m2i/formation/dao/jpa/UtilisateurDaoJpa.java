@@ -1,5 +1,6 @@
 package m2i.formation.dao.jpa;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -7,24 +8,27 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 import m2i.formation.Application;
-import m2i.formation.dao.IPanierDao;
-import m2i.formation.model.Panier;
+import m2i.formation.dao.IUtilisateurDao;
+import m2i.formation.model.Utilisateur;
 
-public class PanierDaoJpa implements IPanierDao {
 
+public class UtilisateurDaoJpa implements IUtilisateurDao{
+	
 	@Override
-	public List<Panier> findAll() {
+	public List<Utilisateur> findAll() {
+		List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
+
 		EntityManager em = null;
 		EntityTransaction tx = null;
-		List<Panier> paniers = null;
 
 		try {
 			em = Application.getInstance().getEmf().createEntityManager();
 			tx = em.getTransaction();
 			tx.begin();
 
-			TypedQuery<Panier> myQuery = em.createQuery("select pan from Panier pan", Panier.class);
-			paniers = myQuery.getResultList();
+			TypedQuery<Utilisateur> query = em.createQuery("select u from Utilisateur u", Utilisateur.class);
+
+			utilisateurs = query.getResultList();
 
 			tx.commit();
 		} catch (Exception e) {
@@ -38,12 +42,12 @@ public class PanierDaoJpa implements IPanierDao {
 			}
 		}
 
-		return paniers;
+		return utilisateurs;
 	}
 
 	@Override
-	public Panier find(Long id) {
-		Panier panier = null;
+	public Utilisateur find(Long id) {
+		Utilisateur utilisateur = null;
 
 		EntityManager em = null;
 		EntityTransaction tx = null;
@@ -53,7 +57,7 @@ public class PanierDaoJpa implements IPanierDao {
 			tx = em.getTransaction();
 			tx.begin();
 
-			panier = em.find(Panier.class, id);
+			utilisateur = em.find(Utilisateur.class, id);
 
 			tx.commit();
 		} catch (Exception e) {
@@ -66,11 +70,12 @@ public class PanierDaoJpa implements IPanierDao {
 				em.close();
 			}
 		}
-		return panier;
+
+		return utilisateur;
 	}
 
 	@Override
-	public void create(Panier obj) {
+	public void create(Utilisateur obj) {
 		EntityManager em = null;
 		EntityTransaction tx = null;
 
@@ -95,8 +100,8 @@ public class PanierDaoJpa implements IPanierDao {
 	}
 
 	@Override
-	public Panier update(Panier obj) {
-		Panier panier = null;
+	public Utilisateur update(Utilisateur obj) {
+		Utilisateur utilisateur = null;
 
 		EntityManager em = null;
 		EntityTransaction tx = null;
@@ -106,7 +111,7 @@ public class PanierDaoJpa implements IPanierDao {
 			tx = em.getTransaction();
 			tx.begin();
 
-			panier = em.merge(obj);
+			utilisateur = em.merge(obj);
 
 			tx.commit();
 		} catch (Exception e) {
@@ -120,7 +125,7 @@ public class PanierDaoJpa implements IPanierDao {
 			}
 		}
 
-		return panier;
+		return utilisateur;
 	}
 
 	@Override
@@ -133,8 +138,8 @@ public class PanierDaoJpa implements IPanierDao {
 			tx = em.getTransaction();
 			tx.begin();
 
-			Panier panier = em.find(Panier.class, id);
-			em.remove(panier);
+			Utilisateur utilisateur = em.find(Utilisateur.class, id);
+			em.remove(utilisateur);
 
 			tx.commit();
 		} catch (Exception e) {
@@ -148,5 +153,6 @@ public class PanierDaoJpa implements IPanierDao {
 			}
 		}
 	}
+
 
 }
