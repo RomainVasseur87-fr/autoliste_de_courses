@@ -1,22 +1,17 @@
 package m2i.formation.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class Magasin {
 	@Id
 	@GeneratedValue
 	private long id;
-	@Column(name = "nom")
 	private String nom;
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "adresse_id")
+	@Transient
 	private Adresse adresse;
 	
 	public Magasin() {

@@ -1,29 +1,20 @@
 package m2i.formation.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table (name = "adresse")
 public class Adresse {
 
 	@Id
 	@GeneratedValue
 	private long id;
-	@Column(name = "numero")
 	private int numero;
-	@Column(name = "rue")
 	private String rue;
-	@Column(name = "complement")
 	private String complement;
-	@Column(name = "ville")
 	private String ville;
-	@Column(name = "codePostal")
 	private String codePostal;
-	@Column(name = "pays")
 	private String pays;
 
 	public Adresse() {
