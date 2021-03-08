@@ -46,6 +46,13 @@ public class Utilisateur {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public Utilisateur(String nom, String prenom, String email) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+	}
+	
 	public Utilisateur(String nom, String prenom, String email, Type type) {
 		super();
 		this.nom = nom;
