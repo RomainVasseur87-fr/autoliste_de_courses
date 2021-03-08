@@ -2,27 +2,19 @@ package m2i.formation.model;
 
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
-@Table(name="commande")
 public class Commande {
 
 	@Id
 	@GeneratedValue
 	private long id;
-	@Column(name = "nom")
 	private String nom;
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "articles", joinColumns = @JoinColumn(name = "commande_id"), inverseJoinColumns = @JoinColumn(name = "article_id"))
+	@Transient
 	private List<Article> articles;
 
 	public Commande() {
