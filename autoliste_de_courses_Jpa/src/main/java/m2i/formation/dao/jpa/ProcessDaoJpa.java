@@ -8,22 +8,21 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 import m2i.formation.Application;
-import m2i.formation.dao.ICategorieDao;
-import m2i.formation.model.Categorie;
+import m2i.formation.dao.IProcessDao;
 
-public class CategorieDaoJpa implements ICategorieDao {
+public class ProcessDaoJpa implements IProcessDao {
 
 	@Override
-	public List<Categorie> findAll() {
-		List<Categorie> categories = new ArrayList<Categorie>();
+	public List<Process> findAll() {
+		List<Process> process = new ArrayList<Process>();
 		EntityManager em = null;
 		EntityTransaction tx = null;
 		try {
 			em = Application.getInstance().getEmf().createEntityManager();
 			tx = em.getTransaction();
 			tx.begin();
-			TypedQuery<Categorie> query = em.createQuery("select c from Categorie c", Categorie.class);
-			categories = query.getResultList();
+			TypedQuery<Process> query = em.createQuery("select p from Process p", Process.class);
+			process = query.getResultList();
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null && tx.isActive()) {
@@ -35,19 +34,19 @@ public class CategorieDaoJpa implements ICategorieDao {
 				em.close();
 			}
 		}
-		return categories;
+		return process;
 	}
 
 	@Override
-	public Categorie find(Long id) {
-		Categorie categorie = null;
+	public Process find(Long id) {
+		Process process = null;
 		EntityManager em = null;
 		EntityTransaction tx = null;
 		try {
 			em = Application.getInstance().getEmf().createEntityManager();
 			tx = em.getTransaction();
 			tx.begin();
-			categorie = em.find(Categorie.class, id);
+			process = em.find(Process.class, id);
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null && tx.isActive()) {
@@ -59,11 +58,11 @@ public class CategorieDaoJpa implements ICategorieDao {
 				em.close();
 			}
 		}
-		return categorie;
+		return process;
 	}
 
 	@Override
-	public void create(Categorie obj) {
+	public void create(Process obj) {
 		EntityManager em = null;
 		EntityTransaction tx = null;
 		try {
@@ -85,15 +84,15 @@ public class CategorieDaoJpa implements ICategorieDao {
 	}
 
 	@Override
-	public Categorie update(Categorie obj) {
-		Categorie categorie = null;
+	public Process update(Process obj) {
+		Process process = null;
 		EntityManager em = null;
 		EntityTransaction tx = null;
 		try {
 			em = Application.getInstance().getEmf().createEntityManager();
 			tx = em.getTransaction();
 			tx.begin();
-			categorie = em.merge(obj);
+			process = em.merge(obj);
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null && tx.isActive()) {
@@ -105,7 +104,7 @@ public class CategorieDaoJpa implements ICategorieDao {
 				em.close();
 			}
 		}
-		return categorie;
+		return process;
 	}
 
 	@Override
@@ -116,8 +115,8 @@ public class CategorieDaoJpa implements ICategorieDao {
 			em = Application.getInstance().getEmf().createEntityManager();
 			tx = em.getTransaction();
 			tx.begin();
-			Categorie categorie = em.find(Categorie.class, id);
-			em.remove(categorie);
+			Process process = em.find(Process.class, id);
+			em.remove(process);
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null && tx.isActive()) {
@@ -128,7 +127,7 @@ public class CategorieDaoJpa implements ICategorieDao {
 			if (em != null) {
 				em.close();
 			}
-		}
+		}		
 	}
 	
 }

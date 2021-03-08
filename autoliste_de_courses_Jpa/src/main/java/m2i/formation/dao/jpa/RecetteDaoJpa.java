@@ -8,22 +8,22 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 import m2i.formation.Application;
-import m2i.formation.dao.ICategorieDao;
-import m2i.formation.model.Categorie;
+import m2i.formation.dao.IRecetteDao;
+import m2i.formation.model.Recette;
 
-public class CategorieDaoJpa implements ICategorieDao {
+public class RecetteDaoJpa implements IRecetteDao {
 
 	@Override
-	public List<Categorie> findAll() {
-		List<Categorie> categories = new ArrayList<Categorie>();
+	public List<Recette> findAll() {
+		List<Recette> recettes = new ArrayList<Recette>();
 		EntityManager em = null;
 		EntityTransaction tx = null;
 		try {
 			em = Application.getInstance().getEmf().createEntityManager();
 			tx = em.getTransaction();
 			tx.begin();
-			TypedQuery<Categorie> query = em.createQuery("select c from Categorie c", Categorie.class);
-			categories = query.getResultList();
+			TypedQuery<Recette> query = em.createQuery("select r from Recette r", Recette.class);
+			recettes = query.getResultList();
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null && tx.isActive()) {
@@ -35,19 +35,19 @@ public class CategorieDaoJpa implements ICategorieDao {
 				em.close();
 			}
 		}
-		return categories;
+		return recettes;
 	}
 
 	@Override
-	public Categorie find(Long id) {
-		Categorie categorie = null;
+	public Recette find(Long id) {
+		Recette recette = null;
 		EntityManager em = null;
 		EntityTransaction tx = null;
 		try {
 			em = Application.getInstance().getEmf().createEntityManager();
 			tx = em.getTransaction();
 			tx.begin();
-			categorie = em.find(Categorie.class, id);
+			recette = em.find(Recette.class, id);
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null && tx.isActive()) {
@@ -59,11 +59,11 @@ public class CategorieDaoJpa implements ICategorieDao {
 				em.close();
 			}
 		}
-		return categorie;
+		return recette;
 	}
 
 	@Override
-	public void create(Categorie obj) {
+	public void create(Recette obj) {
 		EntityManager em = null;
 		EntityTransaction tx = null;
 		try {
@@ -85,15 +85,15 @@ public class CategorieDaoJpa implements ICategorieDao {
 	}
 
 	@Override
-	public Categorie update(Categorie obj) {
-		Categorie categorie = null;
+	public Recette update(Recette obj) {
+		Recette recette = null;
 		EntityManager em = null;
 		EntityTransaction tx = null;
 		try {
 			em = Application.getInstance().getEmf().createEntityManager();
 			tx = em.getTransaction();
 			tx.begin();
-			categorie = em.merge(obj);
+			recette = em.merge(obj);
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null && tx.isActive()) {
@@ -105,7 +105,7 @@ public class CategorieDaoJpa implements ICategorieDao {
 				em.close();
 			}
 		}
-		return categorie;
+		return recette;
 	}
 
 	@Override
@@ -116,8 +116,8 @@ public class CategorieDaoJpa implements ICategorieDao {
 			em = Application.getInstance().getEmf().createEntityManager();
 			tx = em.getTransaction();
 			tx.begin();
-			Categorie categorie = em.find(Categorie.class, id);
-			em.remove(categorie);
+			Recette recette = em.find(Recette.class, id);
+			em.remove(recette);
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null && tx.isActive()) {
@@ -128,7 +128,7 @@ public class CategorieDaoJpa implements ICategorieDao {
 			if (em != null) {
 				em.close();
 			}
-		}
+		}		
 	}
 	
 }

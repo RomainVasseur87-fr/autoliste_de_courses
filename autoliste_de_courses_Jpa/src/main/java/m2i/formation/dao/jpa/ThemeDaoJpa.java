@@ -8,22 +8,22 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 import m2i.formation.Application;
-import m2i.formation.dao.ICategorieDao;
-import m2i.formation.model.Categorie;
+import m2i.formation.dao.IThemeDao;
+import m2i.formation.model.Theme;
 
-public class CategorieDaoJpa implements ICategorieDao {
+public class ThemeDaoJpa implements IThemeDao {
 
 	@Override
-	public List<Categorie> findAll() {
-		List<Categorie> categories = new ArrayList<Categorie>();
+	public List<Theme> findAll() {
+		List<Theme> themes = new ArrayList<Theme>();
 		EntityManager em = null;
 		EntityTransaction tx = null;
 		try {
 			em = Application.getInstance().getEmf().createEntityManager();
 			tx = em.getTransaction();
 			tx.begin();
-			TypedQuery<Categorie> query = em.createQuery("select c from Categorie c", Categorie.class);
-			categories = query.getResultList();
+			TypedQuery<Theme> query = em.createQuery("select t from Theme t", Theme.class);
+			themes = query.getResultList();
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null && tx.isActive()) {
@@ -35,19 +35,19 @@ public class CategorieDaoJpa implements ICategorieDao {
 				em.close();
 			}
 		}
-		return categories;
+		return themes;
 	}
 
 	@Override
-	public Categorie find(Long id) {
-		Categorie categorie = null;
+	public Theme find(Long id) {
+		Theme theme = null;
 		EntityManager em = null;
 		EntityTransaction tx = null;
 		try {
 			em = Application.getInstance().getEmf().createEntityManager();
 			tx = em.getTransaction();
 			tx.begin();
-			categorie = em.find(Categorie.class, id);
+			theme = em.find(Theme.class, id);
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null && tx.isActive()) {
@@ -59,11 +59,11 @@ public class CategorieDaoJpa implements ICategorieDao {
 				em.close();
 			}
 		}
-		return categorie;
+		return theme;
 	}
 
 	@Override
-	public void create(Categorie obj) {
+	public void create(Theme obj) {
 		EntityManager em = null;
 		EntityTransaction tx = null;
 		try {
@@ -82,18 +82,19 @@ public class CategorieDaoJpa implements ICategorieDao {
 				em.close();
 			}
 		}
+		
 	}
 
 	@Override
-	public Categorie update(Categorie obj) {
-		Categorie categorie = null;
+	public Theme update(Theme obj) {
+		Theme theme = null;
 		EntityManager em = null;
 		EntityTransaction tx = null;
 		try {
 			em = Application.getInstance().getEmf().createEntityManager();
 			tx = em.getTransaction();
 			tx.begin();
-			categorie = em.merge(obj);
+			theme = em.merge(obj);
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null && tx.isActive()) {
@@ -105,7 +106,7 @@ public class CategorieDaoJpa implements ICategorieDao {
 				em.close();
 			}
 		}
-		return categorie;
+		return theme;
 	}
 
 	@Override
@@ -116,8 +117,8 @@ public class CategorieDaoJpa implements ICategorieDao {
 			em = Application.getInstance().getEmf().createEntityManager();
 			tx = em.getTransaction();
 			tx.begin();
-			Categorie categorie = em.find(Categorie.class, id);
-			em.remove(categorie);
+			Theme theme = em.find(Theme.class, id);
+			em.remove(theme);
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null && tx.isActive()) {
@@ -128,7 +129,7 @@ public class CategorieDaoJpa implements ICategorieDao {
 			if (em != null) {
 				em.close();
 			}
-		}
+		}		
 	}
 	
 }
