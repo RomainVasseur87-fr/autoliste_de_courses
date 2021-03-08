@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "Process")
+@Table(name = "process")
 public class Process {
 	
 	@Id

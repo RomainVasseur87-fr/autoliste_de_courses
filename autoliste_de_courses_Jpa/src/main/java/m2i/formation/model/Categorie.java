@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "Categorie")
+@Table(name = "categorie")
 public class Categorie {
 	
 	@Id
