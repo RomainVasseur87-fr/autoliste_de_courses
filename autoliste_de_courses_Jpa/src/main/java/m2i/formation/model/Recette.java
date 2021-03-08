@@ -6,29 +6,36 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.persistence.Version;
 
 @Entity
-@Table(name = "Recette")
+@Table(name = "recette")
 
 public class Recette {
 	
 	@Id
 	@GeneratedValue
 	private Long id;
-	@Version
-	private int version;
+//	@Version
+//	private int version;
 	@Column(name = "nom", length = 255)
 	private String nom;
 	@Column(name = "nbConvives", length = 255)
 	private Long nbConvives;
-	@Transient
+	@OneToOne
+	@JoinColumn(name = "process_id")
 	private Process process;
-	@Transient
+	@ManyToMany
+	@JoinTable(name = "ingredients", joinColumns = @JoinColumn(name = "recette_id"), inverseJoinColumns = @JoinColumn(name = "produit_id"))
 	private List<Produit> ingredients;
-	@Transient
+	@ManyToMany
+	@JoinTable(name = "themes", joinColumns = @JoinColumn(name = "recette_id"), inverseJoinColumns = @JoinColumn(name = "theme_id"))
 	private List<Theme> themes;
 	
 	public Recette() {
