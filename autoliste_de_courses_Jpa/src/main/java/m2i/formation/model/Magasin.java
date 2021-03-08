@@ -1,9 +1,17 @@
 package m2i.formation.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
+@Entity
 public class Magasin {
-	
+	@Id
+	@GeneratedValue
 	private long id;
 	private String nom;
+	@Transient
 	private Adresse adresse;
 	
 	public Magasin() {

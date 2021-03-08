@@ -1,7 +1,14 @@
 package m2i.formation.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Adresse {
 
+	@Id
+	@GeneratedValue
 	private long id;
 	private int numero;
 	private String rue;

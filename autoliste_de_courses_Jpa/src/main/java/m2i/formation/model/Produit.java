@@ -2,12 +2,22 @@ package m2i.formation.model;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
+@Entity
 public class Produit {
 	
+	@Id
+	@GeneratedValue
 	private long id;
 	private String nom;
 	private long quantite;
+	@Transient
 	private List<Categorie> categories;
+	
 	public Produit() {
 		super();
 	}
