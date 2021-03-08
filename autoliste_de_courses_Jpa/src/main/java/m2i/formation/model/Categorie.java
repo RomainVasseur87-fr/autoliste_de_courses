@@ -1,15 +1,22 @@
 package m2i.formation.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
-@Table(name = "Categories")
+@Table(name = "categorie")
 public class Categorie {
 	
 	@Id
+	@GeneratedValue
 	private Long id = 0L;
+	@Version
+	private int version;
+	@Column(name = "nom", length = 255)
 	private String nom = null;
 	
 	public Categorie() {
@@ -51,6 +58,5 @@ public class Categorie {
 	public String toString() {
 		return "Catégorie [id = " + this.getId() + ", nom = " + this.getNom() + "]";
 	}
-
-
+	
 }
