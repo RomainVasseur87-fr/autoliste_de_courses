@@ -1,13 +1,22 @@
 package m2i.formation.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name = "Theme")
 public class Theme {
 	
+	@Id
+	@GeneratedValue
 	private Long id = 0L;
+	@Version
+	private int version;
+	@Column(name = "nom", length = 255)
 	private String nom = null;
 	
 	public Theme() {

@@ -2,19 +2,33 @@ package m2i.formation.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
 
 @Entity
 @Table(name = "Recette")
 
 public class Recette {
-	private Long id;
-	private String nom;
-	private Long NbConvives;
-	private Process process;
 	
+	@Id
+	@GeneratedValue
+	private Long id;
+	@Version
+	private int version;
+	@Column(name = "nom", length = 255)
+	private String nom;
+	@Column(name = "nbConvives", length = 255)
+	private Long nbConvives;
+	@Transient
+	private Process process;
+	@Transient
 	private List<Produit> ingredients;
+	@Transient
 	private List<Theme> themes;
 	
 	public Recette() {
@@ -26,7 +40,7 @@ public class Recette {
 		super();
 		this.id = id;
 		this.nom = nom;
-		NbConvives = nbConvives;
+		this.nbConvives = nbConvives;
 		this.process = process;
 		this.ingredients = ingredients;
 		this.themes = themes;
@@ -48,12 +62,12 @@ public class Recette {
 		this.nom = nom;
 	}
 
-	public Long getNbConvives() {
-		return NbConvives;
+	public Long getnbConvives() {
+		return nbConvives;
 	}
 
-	public void setNbConvives(Long nbConvives) {
-		NbConvives = nbConvives;
+	public void setnbConvives(Long nbConvives) {
+		this.nbConvives = nbConvives;
 	}
 
 	public Process getProcess() {
@@ -82,7 +96,7 @@ public class Recette {
 
 	@Override
 	public String toString() {
-		return "Recette [id = " + this.getId() + ", nom = " + this.getNom() + ", nombre de convives = " + this.getNbConvives() + ", process = " + this.getProcess()
+		return "Recette [id = " + this.getId() + ", nom = " + this.getNom() + ", nombre de convives = " + this.getnbConvives() + ", process = " + this.getProcess()
 				+ ", ingrédients =" + this.getIngredients() + ", thèmes = " + this.getThemes() + "]";
 	}
 	
