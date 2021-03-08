@@ -1,11 +1,20 @@
 package m2i.formation.model;
 
-public class Article {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 
+@Entity
+public class Article {
+	
+	@Id
+	@GeneratedValue
 	private long id;
 	private String nom;
 	private long conditionement;
 	private long prix;
+	@Transient
 	private Magasin fournisseur;
 
 	public Article() {

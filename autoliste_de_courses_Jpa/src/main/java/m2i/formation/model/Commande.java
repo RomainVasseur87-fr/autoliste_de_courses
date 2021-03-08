@@ -2,10 +2,19 @@ package m2i.formation.model;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
+@Entity
 public class Commande {
 
+	@Id
+	@GeneratedValue
 	private long id;
 	private String nom;
+	@Transient
 	private List<Article> articles;
 
 	public Commande() {
