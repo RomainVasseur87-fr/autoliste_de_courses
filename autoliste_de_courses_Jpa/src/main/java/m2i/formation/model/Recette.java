@@ -2,6 +2,12 @@ package m2i.formation.model;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Recette")
+
 public class Recette {
 	private Long id;
 	private String nom;

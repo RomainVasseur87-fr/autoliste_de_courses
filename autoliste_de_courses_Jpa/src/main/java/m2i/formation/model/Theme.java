@@ -1,5 +1,10 @@
 package m2i.formation.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Theme")
 public class Theme {
 	
 	private Long id = 0L;

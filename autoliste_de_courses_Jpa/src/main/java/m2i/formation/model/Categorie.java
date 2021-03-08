@@ -1,7 +1,14 @@
 package m2i.formation.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Categories")
 public class Categorie {
 	
+	@Id
 	private Long id = 0L;
 	private String nom = null;
 	
