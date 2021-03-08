@@ -1,14 +1,18 @@
 package m2i.formation.model;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
@@ -21,22 +25,21 @@ public class Utilisateur {
 	private Long id;
 	@Version
 	private int version;
-	@Enumerated(EnumType.STRING)
 	@Column(name = "nom", length = 255)
 	private String nom;
 	@Column(name = "prenom", length = 255)
 	private String prenom;
 	@Column(name = "email", length = 255)
 	private String email;
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "type_id")
+	@ManyToOne
+	@JoinColumn(name="type_id")
 	private Type type;
-	//@OneToOne(fetch = FetchType.EAGER)
-	//@JoinColumn(name = "adresse_id")
-	//private Adresse adresse;
-	//@ManyToMany(fetch = FetchType.LAZY)
-	//@JoinTable(name = "utilisateur_recettes", joinColumns = @JoinColumn(name = "utilisateur.id"), inverseJoinColumns = @JoinColumn(name = "recette_id"))
-	//private List<Recette> recettes = new ArrayList<Recette>();
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "adresse_id")
+	private Adresse adresse;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "utilisateur_recettes", joinColumns = @JoinColumn(name = "utilisateur.id"), inverseJoinColumns = @JoinColumn(name = "recette_id"))
+	private List<Recette> recettes = new ArrayList<Recette>();
 
 	public Utilisateur() {
 		super();
@@ -106,6 +109,22 @@ public class Utilisateur {
 
 	public void setType(Type type) {
 		this.type = type;
+	}
+
+	public Adresse getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
+	}
+
+	public List<Recette> getRecettes() {
+		return recettes;
+	}
+
+	public void setRecettes(List<Recette> recettes) {
+		this.recettes = recettes;
 	}
 	
 	
