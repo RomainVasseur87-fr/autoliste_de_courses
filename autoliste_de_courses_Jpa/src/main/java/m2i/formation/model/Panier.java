@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Transient;
+import javax.persistence.Version;
 
 @Entity
 public class Panier {
@@ -13,6 +14,8 @@ public class Panier {
 	@Id
 	@GeneratedValue
 	private long id;
+	@Version
+	private int version;
 	private String nom;
 	@Transient
 	private List<Produit> produits;
