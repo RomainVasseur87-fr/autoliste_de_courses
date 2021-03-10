@@ -4,154 +4,60 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 
-import m2i.formation.Application;
+import org.springframework.stereotype.Repository;
+
 import m2i.formation.dao.IUtilisateurDao;
 import m2i.formation.model.Utilisateur;
 
-
+@Repository
+@Transactional
 public class UtilisateurDaoJpa implements IUtilisateurDao{
+	
+	@PersistenceContext
+	private EntityManager em;
 	
 	@Override
 	public List<Utilisateur> findAll() {
+		
 		List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
+		TypedQuery<Utilisateur> query = em.createQuery("select u from Utilisateur u", Utilisateur.class);
+		return utilisateurs = query.getResultList();
 
-		EntityManager em = null;
-		EntityTransaction tx = null;
-
-		try {
-			em = Application.getInstance().getEmf().createEntityManager();
-			tx = em.getTransaction();
-			tx.begin();
-
-			TypedQuery<Utilisateur> query = em.createQuery("select u from Utilisateur u", Utilisateur.class);
-
-			utilisateurs = query.getResultList();
-
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			if (em != null) {
-				em.close();
-			}
-		}
-
-		return utilisateurs;
 	}
 
 	@Override
 	public Utilisateur find(Long id) {
+		
 		Utilisateur utilisateur = null;
+		return utilisateur = em.find(Utilisateur.class, id);
 
-		EntityManager em = null;
-		EntityTransaction tx = null;
-
-		try {
-			em = Application.getInstance().getEmf().createEntityManager();
-			tx = em.getTransaction();
-			tx.begin();
-
-			utilisateur = em.find(Utilisateur.class, id);
-
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			if (em != null) {
-				em.close();
-			}
-		}
-
-		return utilisateur;
 	}
 
 	@Override
 	public void create(Utilisateur obj) {
-		EntityManager em = null;
-		EntityTransaction tx = null;
 
-		try {
-			em = Application.getInstance().getEmf().createEntityManager();
-			tx = em.getTransaction();
-			tx.begin();
+		em.persist(obj);
 
-			em.persist(obj);
-
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			if (em != null) {
-				em.close();
-			}
-		}
 	}
 
 	@Override
 	public Utilisateur update(Utilisateur obj) {
+		
 		Utilisateur utilisateur = null;
+		return utilisateur = em.merge(obj);
 
-		EntityManager em = null;
-		EntityTransaction tx = null;
-
-		try {
-			em = Application.getInstance().getEmf().createEntityManager();
-			tx = em.getTransaction();
-			tx.begin();
-
-			utilisateur = em.merge(obj);
-
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			if (em != null) {
-				em.close();
-			}
-		}
-
-		return utilisateur;
 	}
 
 	@Override
 	public void delete(Long id) {
-		EntityManager em = null;
-		EntityTransaction tx = null;
+		
+		Utilisateur utilisateur = em.find(Utilisateur.class, id);
+		em.remove(utilisateur);
 
-		try {
-			em = Application.getInstance().getEmf().createEntityManager();
-			tx = em.getTransaction();
-			tx.begin();
-
-			Utilisateur utilisateur = em.find(Utilisateur.class, id);
-			em.remove(utilisateur);
-
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			if (em != null) {
-				em.close();
-			}
-		}
 	}
 
 
