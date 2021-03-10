@@ -38,7 +38,7 @@ public class Utilisateur {
 	@JoinColumn(name = "adresse_id")
 	private Adresse adresse;
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "utilisateur_recettes", joinColumns = @JoinColumn(name = "utilisateur.id"), inverseJoinColumns = @JoinColumn(name = "recette_id"))
+	@JoinTable(name = "utilisateur_recettes", joinColumns = @JoinColumn(name = "utilisateur_id"), inverseJoinColumns = @JoinColumn(name = "recette_id"))
 	private List<Recette> recettes = new ArrayList<Recette>();
 
 	public Utilisateur() {

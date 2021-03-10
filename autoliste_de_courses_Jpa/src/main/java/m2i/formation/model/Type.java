@@ -26,7 +26,7 @@ public class Type {
 	@Column(name = "nom", length = 255)
 	private String nom;
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "type_droits", joinColumns = @JoinColumn(name = "type.id"), inverseJoinColumns = @JoinColumn(name = "droit_id"))
+	@JoinTable(name = "type_droits", joinColumns = @JoinColumn(name = "type_id"), inverseJoinColumns = @JoinColumn(name = "droit_id"))
 	private List<Droit> droits = new ArrayList<Droit>();
 	@OneToMany(mappedBy = "type", fetch = FetchType.LAZY)
 	private List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();

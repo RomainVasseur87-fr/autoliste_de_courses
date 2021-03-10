@@ -11,6 +11,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name = "recette")
@@ -20,8 +21,8 @@ public class Recette {
 	@Id
 	@GeneratedValue
 	private Long id;
-//	@Version
-//	private int version;
+	@Version
+	private int version;
 	@Column(name = "nom", length = 255)
 	private String nom;
 	@Column(name = "nbConvives", length = 255)
