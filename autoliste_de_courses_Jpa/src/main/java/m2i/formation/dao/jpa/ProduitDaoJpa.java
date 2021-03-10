@@ -3,40 +3,29 @@ package m2i.formation.dao.jpa;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import m2i.formation.Application;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import m2i.formation.dao.IProduitDao;
 import m2i.formation.model.Produit;
 
+@Repository
+@Transactional
 public class ProduitDaoJpa implements IProduitDao {
+
+	@PersistenceContext
+	private EntityManager em;
 
 	@Override
 	public List<Produit> findAll() {
-		EntityManager em = null;
-		EntityTransaction tx = null;
+
 		List<Produit> produits = null;
 
-		try {
-			em = Application.getInstance().getEmf().createEntityManager();
-			tx = em.getTransaction();
-			tx.begin();
-
-			TypedQuery<Produit> myQuery = em.createQuery("select pro from Produit pro", Produit.class);
-			produits = myQuery.getResultList();
-
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			if (em != null) {
-				em.close();
-			}
-		}
+		TypedQuery<Produit> myQuery = em.createQuery("select pro from Produit pro", Produit.class);
+		produits = myQuery.getResultList();
 
 		return produits;
 	}
@@ -45,108 +34,33 @@ public class ProduitDaoJpa implements IProduitDao {
 	public Produit find(Long id) {
 		Produit produit = null;
 
-		EntityManager em = null;
-		EntityTransaction tx = null;
+		produit = em.find(Produit.class, id);
 
-		try {
-			em = Application.getInstance().getEmf().createEntityManager();
-			tx = em.getTransaction();
-			tx.begin();
-
-			produit = em.find(Produit.class, id);
-
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			if (em != null) {
-				em.close();
-			}
-		}
 		return produit;
 	}
 
 	@Override
 	public void create(Produit obj) {
-		EntityManager em = null;
-		EntityTransaction tx = null;
 
-		try {
-			em = Application.getInstance().getEmf().createEntityManager();
-			tx = em.getTransaction();
-			tx.begin();
+		em.persist(obj);
 
-			em.persist(obj);
-
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			if (em != null) {
-				em.close();
-			}
-		}
 	}
 
 	@Override
 	public Produit update(Produit obj) {
 		Produit produit = null;
 
-		EntityManager em = null;
-		EntityTransaction tx = null;
-
-		try {
-			em = Application.getInstance().getEmf().createEntityManager();
-			tx = em.getTransaction();
-			tx.begin();
-
-			produit = em.merge(obj);
-
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			if (em != null) {
-				em.close();
-			}
-		}
+		produit = em.merge(obj);
 
 		return produit;
 	}
 
 	@Override
 	public void delete(Long id) {
-		EntityManager em = null;
-		EntityTransaction tx = null;
 
-		try {
-			em = Application.getInstance().getEmf().createEntityManager();
-			tx = em.getTransaction();
-			tx.begin();
+		Produit produit = em.find(Produit.class, id);
+		em.remove(produit);
 
-			Produit produit = em.find(Produit.class, id);
-			em.remove(produit);
-
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			if (em != null) {
-				em.close();
-			}
-		}
 	}
 
 }
