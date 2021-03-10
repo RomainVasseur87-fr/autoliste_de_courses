@@ -1,25 +1,10 @@
 package m2i.formation.test;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Version;
 
 import m2i.formation.Application;
-import m2i.formation.model.Adresse;
-import m2i.formation.model.Recette;
-import m2i.formation.model.Type;
 import m2i.formation.model.Utilisateur;
 
 public class AutoListeMain {
@@ -58,8 +43,6 @@ public class AutoListeMain {
 				em.close();
 			}
 		}
-
-	}
 
 	}
 
