@@ -3,40 +3,28 @@ package m2i.formation.dao.jpa;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import m2i.formation.Application;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import m2i.formation.dao.IArticleDao;
 import m2i.formation.model.Article;
 
+@Repository
+@Transactional
 public class ArticleDaoJpa implements IArticleDao {
+
+	@PersistenceContext
+	private EntityManager em;
 
 	@Override
 	public List<Article> findAll() {
-		EntityManager em = null;
-		EntityTransaction tx = null;
 		List<Article> articles = null;
 
-		try {
-			em = Application.getInstance().getEmf().createEntityManager();
-			tx = em.getTransaction();
-			tx.begin();
-
-			TypedQuery<Article> myQuery = em.createQuery("select art from Article art", Article.class);
-			articles = myQuery.getResultList();
-
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			if (em != null) {
-				em.close();
-			}
-		}
+		TypedQuery<Article> myQuery = em.createQuery("select art from Article art", Article.class);
+		articles = myQuery.getResultList();
 
 		return articles;
 	}
@@ -45,108 +33,33 @@ public class ArticleDaoJpa implements IArticleDao {
 	public Article find(Long id) {
 		Article article = null;
 
-		EntityManager em = null;
-		EntityTransaction tx = null;
+		article = em.find(Article.class, id);
 
-		try {
-			em = Application.getInstance().getEmf().createEntityManager();
-			tx = em.getTransaction();
-			tx.begin();
-
-			article = em.find(Article.class, id);
-
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			if (em != null) {
-				em.close();
-			}
-		}
 		return article;
 	}
 
 	@Override
 	public void create(Article obj) {
-		EntityManager em = null;
-		EntityTransaction tx = null;
 
-		try {
-			em = Application.getInstance().getEmf().createEntityManager();
-			tx = em.getTransaction();
-			tx.begin();
+		em.persist(obj);
 
-			em.persist(obj);
-
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			if (em != null) {
-				em.close();
-			}
-		}
 	}
 
 	@Override
 	public Article update(Article obj) {
 		Article article = null;
 
-		EntityManager em = null;
-		EntityTransaction tx = null;
-
-		try {
-			em = Application.getInstance().getEmf().createEntityManager();
-			tx = em.getTransaction();
-			tx.begin();
-
-			article = em.merge(obj);
-
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			if (em != null) {
-				em.close();
-			}
-		}
+		article = em.merge(obj);
 
 		return article;
 	}
 
 	@Override
 	public void delete(Long id) {
-		EntityManager em = null;
-		EntityTransaction tx = null;
 
-		try {
-			em = Application.getInstance().getEmf().createEntityManager();
-			tx = em.getTransaction();
-			tx.begin();
+		Article article = em.find(Article.class, id);
+		em.remove(article);
 
-			Article article = em.find(Article.class, id);
-			em.remove(article);
-
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			if (em != null) {
-				em.close();
-			}
-		}
 	}
 
 }
