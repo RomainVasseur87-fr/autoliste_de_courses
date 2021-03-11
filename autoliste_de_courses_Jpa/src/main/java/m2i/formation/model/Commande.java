@@ -2,15 +2,18 @@ package m2i.formation.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
+@Table(name = "commande")
 public class Commande {
 
 	@Id
@@ -18,6 +21,7 @@ public class Commande {
 	private long id;
 	@Version
 	private int version;
+	@Column(name="nom")
 	private String nom;
 	@OneToMany
 	@JoinTable(name ="commande_articles", joinColumns = @JoinColumn(name = "commande_id"), inverseJoinColumns = @JoinColumn (name ="article_id"))

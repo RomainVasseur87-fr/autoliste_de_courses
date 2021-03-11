@@ -22,18 +22,21 @@ public class Droit {
 	private int version;
 	@Column(name = "libelle", length = 255)
 	private String libelle;
-	@Column(name = "action")
+	
 	private String action;
+	
 	private boolean canCreate;
+
 	private boolean canRead;
+	
 	private boolean canUpdate;
+	
 	private boolean canDelete;
 	@ManyToMany(mappedBy = "droits", fetch = FetchType.LAZY)
 	private List<Type> types = new ArrayList<Type>();
 	
 	public Droit() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Droit(String libelle, String action, boolean canCreate, boolean canRead, boolean canUpdate, boolean canDelete) {

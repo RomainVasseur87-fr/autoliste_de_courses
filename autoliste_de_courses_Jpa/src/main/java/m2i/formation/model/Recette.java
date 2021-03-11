@@ -15,7 +15,6 @@ import javax.persistence.Version;
 
 @Entity
 @Table(name = "recette")
-
 public class Recette {
 	
 	@Id

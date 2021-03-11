@@ -1,13 +1,16 @@
 package m2i.formation.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
+@Table(name = "article")
 public class Article {
 	
 	@Id
@@ -15,8 +18,11 @@ public class Article {
 	private long id;
 	@Version
 	private int version;
+	@Column(name="nom")
 	private String nom;
+	@Column(name="conditionement")
 	private long conditionement;
+	@Column(name="prix")
 	private long prix;
 	@OneToOne
 	@JoinColumn (name = "magasin_id")

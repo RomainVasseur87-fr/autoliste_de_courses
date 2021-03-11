@@ -1,19 +1,23 @@
 package m2i.formation.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
+@Table(name = "magasin")
 public class Magasin {
 	@Id
 	@GeneratedValue
 	private long id;
 	@Version
 	private int version;
+	@Column(name="nom")
 	private String nom;
 	@OneToOne
 	@JoinColumn (name = "adresse_id")
