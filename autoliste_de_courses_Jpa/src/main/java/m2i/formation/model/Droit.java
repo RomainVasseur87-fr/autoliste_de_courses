@@ -37,7 +37,6 @@ public class Droit {
 	
 	public Droit() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Droit(String libelle, String action, boolean canCreate, boolean canRead,

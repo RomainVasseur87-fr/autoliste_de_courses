@@ -13,7 +13,7 @@ public class Categorie {
 	
 	@Id
 	@GeneratedValue
-	private Long id = 0L;
+	private Long id;
 	@Version
 	private int version;
 	@Column(name = "nom", length = 255)
