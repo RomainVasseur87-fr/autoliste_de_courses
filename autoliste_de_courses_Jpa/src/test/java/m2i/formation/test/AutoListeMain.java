@@ -46,9 +46,9 @@ public class AutoListeMain {
 		Utilisateur romainUtilisateur = new Utilisateur("Vasseur", "Romain", "rva@gmail.com");
 		Utilisateur mohamedUtilisateur = new Utilisateur("Djadane", "Mohamed", "mdj@gmail.com");
 
-		utilisateurDao.create(christopheUtilisateur);
-		utilisateurDao.create(romainUtilisateur);
-		utilisateurDao.create(mohamedUtilisateur);
+		utilisateurDao.save(christopheUtilisateur);
+		utilisateurDao.save(romainUtilisateur);
+		utilisateurDao.save(mohamedUtilisateur);
 		
 		context.close();
 	}
