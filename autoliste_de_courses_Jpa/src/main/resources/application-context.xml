@@ -20,7 +20,9 @@
 
 	<!-- Indiquer dans quel paquetage scanner pour trouver des annotations -->
 	<context:component-scan
-		base-package="m2i.formation.dao.jpa" />
+		base-package="m2i.formation.dao" />
+		<!-- Scan des JpaRepositories -->
+	<jpa:repositories base-package="m2i.formation.dao" />
 
 	<!-- On crée le DataSource -->
 	<bean id="dataSource"
