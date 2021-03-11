@@ -24,14 +24,10 @@ public class Droit {
 	private String libelle;
 	@Column(name = "action")
 	private String action;
-	//@Column(name = "create", nullable = false, columnDefinition = "BOOLEAN")
-	//private boolean canCreate;
-	//@Column(name = "read", nullable = false, columnDefinition = "TINYINT(1)")
-	//private boolean canRead;
-	//@Column(name = "update", nullable = false, columnDefinition = "TINYINT(1)")
-	//private boolean canUpdate;
-	//@Column(name = "delete", nullable = false, columnDefinition = "TINYINT(1)")
-	//private boolean canDelete;
+	private boolean canCreate;
+	private boolean canRead;
+	private boolean canUpdate;
+	private boolean canDelete;
 	@ManyToMany(mappedBy = "droits", fetch = FetchType.LAZY)
 	private List<Type> types = new ArrayList<Type>();
 	
@@ -40,18 +36,25 @@ public class Droit {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Droit(String libelle, String action) {
+	public Droit(String libelle, String action, boolean canCreate, boolean canRead, boolean canUpdate, boolean canDelete) {
 		super();
 		this.libelle = libelle;
 		this.action = action;
-
+		this.canCreate = canCreate;
+		this.canRead = canRead;
+		this.canUpdate = canUpdate;
+		this.canDelete = canDelete;
 	}
 	
-	public Droit(Long id, String libelle, String action) {
+	public Droit(Long id, String libelle, String action, boolean canCreate, boolean canRead, boolean canUpdate, boolean canDelete) {
 		super();
 		this.id = id;
 		this.libelle = libelle;
 		this.action = action;
+		this.canCreate = canCreate;
+		this.canRead = canRead;
+		this.canUpdate = canUpdate;
+		this.canDelete = canDelete;
 	}
 
 	public Long getId() {
@@ -92,6 +95,38 @@ public class Droit {
 
 	public void setTypes(List<Type> types) {
 		this.types = types;
+	}
+
+	public boolean isCanCreate() {
+		return canCreate;
+	}
+
+	public void setCanCreate(boolean canCreate) {
+		this.canCreate = canCreate;
+	}
+
+	public boolean isCanRead() {
+		return canRead;
+	}
+
+	public void setCanRead(boolean canRead) {
+		this.canRead = canRead;
+	}
+
+	public boolean isCanUpdate() {
+		return canUpdate;
+	}
+
+	public void setCanUpdate(boolean canUpdate) {
+		this.canUpdate = canUpdate;
+	}
+
+	public boolean isCanDelete() {
+		return canDelete;
+	}
+
+	public void setCanDelete(boolean canDelete) {
+		this.canDelete = canDelete;
 	}
 
 	
