@@ -1,11 +1,14 @@
 package m2i.formation.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
+@Table (name ="adresse")
 public class Adresse {
 
 	@Id
@@ -13,11 +16,17 @@ public class Adresse {
 	private long id;
 	@Version
 	private int version;
+	@Column(name="numero")
 	private int numero;
+	@Column(name="rue")
 	private String rue;
+	@Column(name="complement")
 	private String complement;
+	@Column(name="ville")
 	private String ville;
+	@Column(name="codePostal")
 	private String codePostal;
+	@Column(name="pays")
 	private String pays;
 
 	public Adresse() {

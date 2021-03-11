@@ -1,5 +1,7 @@
 package m2i.formation.dao;
 
-public interface IProcessDao extends IDao<Process, Long> {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface IProcessDao extends JpaRepository<Process, Long> {
 
 }
