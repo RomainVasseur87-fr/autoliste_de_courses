@@ -1,49 +1,56 @@
 package m2i.formation.test;
 
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+import java.text.SimpleDateFormat;
 
-import m2i.formation.Application;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import m2i.formation.dao.IAdresseDao;
+import m2i.formation.dao.IArticleDao;
+import m2i.formation.dao.ICategorieDao;
+import m2i.formation.dao.ICommandeDao;
+import m2i.formation.dao.IDroitDao;
+import m2i.formation.dao.IMagasinDao;
+import m2i.formation.dao.IPanierDao;
+import m2i.formation.dao.IProcessDao;
+import m2i.formation.dao.IProduitDao;
+import m2i.formation.dao.IRecetteDao;
+import m2i.formation.dao.IThemeDao;
+import m2i.formation.dao.ITypeDao;
+import m2i.formation.dao.IUtilisateurDao;
 import m2i.formation.model.Utilisateur;
 
 public class AutoListeMain {
 
 	public static void main(String[] args) {
 
-		EntityManager em = null;
-		EntityTransaction tx = null;
-
-		Utilisateur christopheUtilisateur = null;
-		Utilisateur romainUtilisateur = null;
-		Utilisateur mohamedUtilisateur = null;
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		
+		IAdresseDao adresseDao = context.getBean(IAdresseDao.class);
+		IArticleDao articleDao = context.getBean(IArticleDao.class);
+		ICategorieDao categorieDao = context.getBean(ICategorieDao.class);
+		ICommandeDao commandeDao = context.getBean(ICommandeDao.class);
+		IDroitDao droitDao = context.getBean(IDroitDao.class);
+		IMagasinDao magasinDao = context.getBean(IMagasinDao.class);
+		IPanierDao panierDao = context.getBean(IPanierDao.class);
+		IProcessDao processDao = context.getBean(IProcessDao.class);
+		IProduitDao produitDao = context.getBean(IProduitDao.class);
+		IRecetteDao recetteDao = context.getBean(IRecetteDao.class);
+		IThemeDao themeDao = context.getBean(IThemeDao.class);
+		ITypeDao typeDao = context.getBean(ITypeDao.class);
+		IUtilisateurDao utilisateurDao = context.getBean(IUtilisateurDao.class);
 
-		try {
-			em = Application.getInstance().getEmf().createEntityManager();
-			tx = em.getTransaction();
+		Utilisateur christopheUtilisateur = new Utilisateur("Varlet", "Christophe", "cva@gmail.com");
+		Utilisateur romainUtilisateur = new Utilisateur("Vasseur", "Romain", "rva@gmail.com");
+		Utilisateur mohamedUtilisateur = new Utilisateur("Djadane", "Mohamed", "mdj@gmail.com");
 
-			tx.begin();
-
-			christopheUtilisateur = new Utilisateur("Varlet", "Christophe", "cva@gmail.com");
-			em.persist(christopheUtilisateur);
-			romainUtilisateur = new Utilisateur("Vasseur", "Romain", "rva@gmail.com");
-			em.persist(romainUtilisateur);
-			mohamedUtilisateur = new Utilisateur("Djadane", "Mohamed", "mdj@gmail.com");
-			em.persist(mohamedUtilisateur);
-
-			tx.commit(); 
-		} catch (Exception e) {
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			if (em != null) {
-				em.close();
-			}
-		}
-
+		utilisateurDao.create(christopheUtilisateur);
+		utilisateurDao.create(romainUtilisateur);
+		utilisateurDao.create(mohamedUtilisateur);
+		
+		context.close();
 	}
 
 }

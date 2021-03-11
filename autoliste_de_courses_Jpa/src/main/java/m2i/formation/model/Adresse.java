@@ -3,6 +3,7 @@ package m2i.formation.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Version;
 
 @Entity
 public class Adresse {
@@ -10,6 +11,8 @@ public class Adresse {
 	@Id
 	@GeneratedValue
 	private long id;
+	@Version
+	private int version;
 	private int numero;
 	private String rue;
 	private String complement;
