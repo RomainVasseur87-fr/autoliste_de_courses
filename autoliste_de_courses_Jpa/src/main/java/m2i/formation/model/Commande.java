@@ -5,7 +5,10 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.Version;
 
 @Entity
 public class Commande {
@@ -13,8 +16,11 @@ public class Commande {
 	@Id
 	@GeneratedValue
 	private long id;
+	@Version
+	private int version;
 	private String nom;
-	@Transient
+	@OneToMany
+	@JoinTable(name ="commande_articles", joinColumns = @JoinColumn(name = "commande_id"), inverseJoinColumns = @JoinColumn (name ="article_id"))
 	private List<Article> articles;
 
 	public Commande() {
