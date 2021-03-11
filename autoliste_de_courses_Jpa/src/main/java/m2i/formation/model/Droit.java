@@ -22,15 +22,15 @@ public class Droit {
 	private int version;
 	@Column(name = "libelle", length = 255)
 	private String libelle;
-	@Column(name = "action")
+	
 	private String action;
-	@Column(name = "create")
+	
 	private boolean canCreate;
-	@Column(name = "read")
+
 	private boolean canRead;
-	@Column(name = "update")
+	
 	private boolean canUpdate;
-	@Column(name = "delete")
+	
 	private boolean canDelete;
 	@ManyToMany(mappedBy = "droits", fetch = FetchType.LAZY)
 	private List<Type> types = new ArrayList<Type>();
