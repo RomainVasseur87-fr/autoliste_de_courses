@@ -26,7 +26,7 @@ public class Article {
 	private long prix;
 	@OneToOne
 	@JoinColumn (name = "magasin_id")
-	private Magasin fournisseur;
+	private Magasin magasin;
 
 	public Article() {
 		super();
@@ -37,7 +37,7 @@ public class Article {
 		this.nom = nom;
 		this.conditionement = conditionement;
 		this.prix = prix;
-		this.fournisseur = fournisseur;
+		this.magasin = fournisseur;
 	}
 
 	public Article(long id, String nom, long conditionement, long prix, Magasin fournisseur) {
@@ -46,7 +46,7 @@ public class Article {
 		this.nom = nom;
 		this.conditionement = conditionement;
 		this.prix = prix;
-		this.fournisseur = fournisseur;
+		this.magasin = fournisseur;
 	}
 
 	public long getId() {
@@ -82,17 +82,17 @@ public class Article {
 	}
 
 	public Magasin getFournisseur() {
-		return fournisseur;
+		return magasin;
 	}
 
 	public void setFournisseur(Magasin fournisseur) {
-		this.fournisseur = fournisseur;
+		this.magasin = fournisseur;
 	}
 
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", nom=" + nom + ", conditionement=" + conditionement + ", prix=" + prix
-				+ ", fournisseur=" + fournisseur + "]";
+				+ ", fournisseur=" + magasin + "]";
 	}
 
 }
