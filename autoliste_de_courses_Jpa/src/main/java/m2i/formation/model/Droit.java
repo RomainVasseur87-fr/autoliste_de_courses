@@ -39,8 +39,7 @@ public class Droit {
 		super();
 	}
 	
-	public Droit(String libelle, String action, boolean canCreate, boolean canRead,
-			boolean canUpdate, boolean canDelete) {
+	public Droit(String libelle, String action, boolean canCreate, boolean canRead, boolean canUpdate, boolean canDelete) {
 		super();
 		this.libelle = libelle;
 		this.action = action;
@@ -50,8 +49,7 @@ public class Droit {
 		this.canDelete = canDelete;
 	}
 	
-	public Droit(Long id, String libelle, String action, boolean canCreate, boolean canRead,
-			boolean canUpdate, boolean canDelete) {
+	public Droit(Long id, String libelle, String action, boolean canCreate, boolean canRead, boolean canUpdate, boolean canDelete) {
 		super();
 		this.id = id;
 		this.libelle = libelle;
@@ -94,6 +92,14 @@ public class Droit {
 		this.action = action;
 	}
 
+	public List<Type> getTypes() {
+		return types;
+	}
+
+	public void setTypes(List<Type> types) {
+		this.types = types;
+	}
+
 	public boolean isCanCreate() {
 		return canCreate;
 	}
@@ -124,14 +130,6 @@ public class Droit {
 
 	public void setCanDelete(boolean canDelete) {
 		this.canDelete = canDelete;
-	}
-
-	public List<Type> getTypes() {
-		return types;
-	}
-
-	public void setTypes(List<Type> types) {
-		this.types = types;
 	}
 
 	

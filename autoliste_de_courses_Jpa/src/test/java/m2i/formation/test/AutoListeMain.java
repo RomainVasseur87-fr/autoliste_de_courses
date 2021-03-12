@@ -1,8 +1,6 @@
 package m2i.formation.test;
 
-
 import java.text.SimpleDateFormat;
-
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import m2i.formation.dao.IAdresseDao;
@@ -46,11 +44,11 @@ public class AutoListeMain {
 		Utilisateur romainUtilisateur = new Utilisateur("Vasseur", "Romain", "rva@gmail.com");
 		Utilisateur mohamedUtilisateur = new Utilisateur("Djadane", "Mohamed", "mdj@gmail.com");
 
-		utilisateurDao.create(christopheUtilisateur);
-		utilisateurDao.create(romainUtilisateur);
-		utilisateurDao.create(mohamedUtilisateur);
+		utilisateurDao.save(christopheUtilisateur);
+		utilisateurDao.save(romainUtilisateur);
+		utilisateurDao.save(mohamedUtilisateur);
 		
 		context.close();
 	}
-
+	
 }
