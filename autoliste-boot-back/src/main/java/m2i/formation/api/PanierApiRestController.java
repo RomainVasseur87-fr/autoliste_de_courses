@@ -1,4 +1,4 @@
-package m2i.formation.ap1;
+package m2i.formation.api;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,59 +15,59 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import m2i.formation.dao.IUtilisateurDao;
-import m2i.formation.model.Utilisateur;
+import m2i.formation.dao.IPanierDao;
+import m2i.formation.model.Panier;
 
 @RestController
-@RequestMapping("/api/utilisateur")
-public class UtilisateurApiRestController {
+@RequestMapping("/api/panier")
+public class PanierApiRestController {
 	@Autowired
-	private IUtilisateurDao utilisateurDao;
+	private IPanierDao panierDao;
 
 	@GetMapping("")
-	public List<Utilisateur> list() {
-		List<Utilisateur> utilisateurs = utilisateurDao.findAll();
-		return utilisateurs;
+	public List<Panier> list() {
+		List<Panier> paniers = panierDao.findAll();
+		return paniers;
 	}
 
 	@GetMapping("/{id}")
-	public Utilisateur find(@PathVariable Long id) {
-		Optional<Utilisateur> optUtilisateur = utilisateurDao.findById(id);
+	public Panier find(@PathVariable Long id) {
+		Optional<Panier> optPanier = panierDao.findById(id);
 
-		if (optUtilisateur.isPresent()) {
-			return optUtilisateur.get();
+		if (optPanier.isPresent()) {
+			return optPanier.get();
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 	}
 
 	@PostMapping("")
-	public Utilisateur create(@RequestBody Utilisateur utilisateur) {
-		utilisateur = utilisateurDao.save(utilisateur);
+	public Panier create(@RequestBody Panier panier) {
+		panier = panierDao.save(panier);
 
-		return utilisateur;
+		return panier;
 	}
 
 	@PutMapping("/{id}")
-	public Utilisateur update(@RequestBody Utilisateur utilisateur, @PathVariable Long id) {
-		if (!utilisateurDao.existsById(id) || !id.equals(utilisateur.getId())) {
+	public Panier update(@RequestBody Panier panier, @PathVariable Long id) {
+		if (!panierDao.existsById(id) || !id.equals(panier.getId())) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
 
-		utilisateur = utilisateurDao.save(utilisateur);
+		panier = panierDao.save(panier);
 
-		return utilisateur;
+		return panier;
 	}
 
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
-		if (!utilisateurDao.existsById(id)) {
+		if (!panierDao.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
 
-		utilisateurDao.deleteById(id);
+		panierDao.deleteById(id);
 
-		if (utilisateurDao.existsById(id)) {
+		if (panierDao.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Unable to find resource");
 		}
 	}
