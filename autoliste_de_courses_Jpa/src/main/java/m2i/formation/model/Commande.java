@@ -68,6 +68,14 @@ public class Commande {
 		this.articles = articles;
 	}
 
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
 	@Override
 	public String toString() {
 		return "Commande [id=" + id + ", nom=" + nom + ", articles=" + articles + "]";

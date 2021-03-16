@@ -1,8 +1,6 @@
 package m2i.formation.test;
 
-
 import java.text.SimpleDateFormat;
-
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import m2i.formation.dao.IAdresseDao;
@@ -52,5 +50,5 @@ public class AutoListeMain {
 		
 		context.close();
 	}
-
+	
 }
