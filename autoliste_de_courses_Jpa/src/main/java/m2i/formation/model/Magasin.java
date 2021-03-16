@@ -55,6 +55,13 @@ public class Magasin {
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
 	}
+	
+	public int getVersion() {
+		return version;
+	}
+	public void setVersion(int version) {
+		this.version = version;
+	}
 	@Override
 	public String toString() {
 		return "Magasin [id=" + id + ", nom=" + nom + ", adresse=" + adresse + "]";

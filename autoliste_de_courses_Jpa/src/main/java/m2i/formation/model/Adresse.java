@@ -110,6 +110,14 @@ public class Adresse {
 		this.pays = pays;
 	}
 
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
 	@Override
 	public String toString() {
 		return "Adresse [id=" + id + ", numero=" + numero + ", rue=" + rue + ", complement=" + complement + ", ville="
