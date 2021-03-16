@@ -8,63 +8,63 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "categorie")
-public class Categorie {
+@Table(name = "process")
+public class Process {
 	
 	@Id
 	@GeneratedValue
-	private Long id;
+	private Long id = 0L;
 	@Version
 	private int version;
 	@Column(name = "nom", length = 255)
 	private String nom = null;
+	@Column(name = "description", length = 255)
+	private String description = null;
 	
-	public Categorie() {
+	public Process() {
 		super();
 	}
-	
-	public Categorie(Long id) {
-		super();
-		this.id = id;
-	}
-	public Categorie(String nom) {
+
+	public Process(String nom, String description) {
 		super();
 		this.nom = nom;
+		this.description = description;
 	}
-	
-	public Categorie(Long id, String nom) {
+
+	public Process(Long id, String nom, String description) {
 		super();
 		this.id = id;
 		this.nom = nom;
+		this.description = description;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
-	
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public String getNom() {
 		return nom;
 	}
-	
+
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	
-	public int getVersion() {
-		return version;
+
+	public String getDescription() {
+		return description;
 	}
 
-	public void setVersion(int version) {
-		this.version = version;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override
 	public String toString() {
-		return "Catégorie [id = " + this.getId() + ", nom = " + this.getNom() + "]";
+		return "Process [id = " + this.getId() + ", nom = " + this.getNom() + ", description = " + this.getDescription() + "]";
 	}
 	
 }

@@ -8,31 +8,31 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table(name = "categorie")
-public class Categorie {
+@Table(name = "theme")
+public class Theme {
 	
 	@Id
 	@GeneratedValue
-	private Long id;
+	private Long id = 0L;
 	@Version
 	private int version;
 	@Column(name = "nom", length = 255)
 	private String nom = null;
 	
-	public Categorie() {
+	public Theme() {
 		super();
 	}
 	
-	public Categorie(Long id) {
+	public Theme(Long id) {
 		super();
 		this.id = id;
 	}
-	public Categorie(String nom) {
+	public Theme(String nom) {
 		super();
 		this.nom = nom;
 	}
 	
-	public Categorie(Long id, String nom) {
+	public Theme(Long id, String nom) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -54,17 +54,9 @@ public class Categorie {
 		this.nom = nom;
 	}
 	
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
-	}
-
 	@Override
 	public String toString() {
-		return "Catégorie [id = " + this.getId() + ", nom = " + this.getNom() + "]";
+		return "Thème [id = " + this.getId() + ", nom = " + this.getNom() + "]";
 	}
 	
 }
