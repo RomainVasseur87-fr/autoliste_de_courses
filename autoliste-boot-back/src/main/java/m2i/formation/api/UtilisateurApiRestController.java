@@ -1,4 +1,4 @@
-package m2i.formation.ap1;
+package m2i.formation.api;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,60 +15,59 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import m2i.formation.dao.ITypeDao;
-import m2i.formation.model.Type;
+import m2i.formation.dao.IUtilisateurDao;
+import m2i.formation.model.Utilisateur;
 
 @RestController
-@RequestMapping("/api/type")
-public class TypeApiRestController {
-
+@RequestMapping("/api/utilisateur")
+public class UtilisateurApiRestController {
 	@Autowired
-	private ITypeDao typeDao;
+	private IUtilisateurDao utilisateurDao;
 
 	@GetMapping("")
-	public List<Type> list() {
-		List<Type> types = typeDao.findAll();
-		return types;
+	public List<Utilisateur> list() {
+		List<Utilisateur> utilisateurs = utilisateurDao.findAll();
+		return utilisateurs;
 	}
 
 	@GetMapping("/{id}")
-	public Type find(@PathVariable Long id) {
-		Optional<Type> optType = typeDao.findById(id);
+	public Utilisateur find(@PathVariable Long id) {
+		Optional<Utilisateur> optUtilisateur = utilisateurDao.findById(id);
 
-		if (optType.isPresent()) {
-			return optType.get();
+		if (optUtilisateur.isPresent()) {
+			return optUtilisateur.get();
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 	}
 
 	@PostMapping("")
-	public Type create(@RequestBody Type type) {
-		type = typeDao.save(type);
+	public Utilisateur create(@RequestBody Utilisateur utilisateur) {
+		utilisateur = utilisateurDao.save(utilisateur);
 
-		return type;
+		return utilisateur;
 	}
 
 	@PutMapping("/{id}")
-	public Type update(@RequestBody Type type, @PathVariable Long id) {
-		if (!typeDao.existsById(id) || !id.equals(type.getId())) {
+	public Utilisateur update(@RequestBody Utilisateur utilisateur, @PathVariable Long id) {
+		if (!utilisateurDao.existsById(id) || !id.equals(utilisateur.getId())) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
 
-		type = typeDao.save(type);
+		utilisateur = utilisateurDao.save(utilisateur);
 
-		return type;
+		return utilisateur;
 	}
 
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
-		if (!typeDao.existsById(id)) {
+		if (!utilisateurDao.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
 
-		typeDao.deleteById(id);
+		utilisateurDao.deleteById(id);
 
-		if (typeDao.existsById(id)) {
+		if (utilisateurDao.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Unable to find resource");
 		}
 	}

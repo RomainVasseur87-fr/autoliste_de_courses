@@ -1,4 +1,4 @@
-package m2i.formation.ap1;
+package m2i.formation.api;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,64 +15,62 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import m2i.formation.dao.IArticleDao;
-import m2i.formation.model.Article;
+import m2i.formation.dao.ITypeDao;
+import m2i.formation.model.Type;
 
 @RestController
-@RequestMapping("/api/article")
-public class ArticleApiRestController {
-	
+@RequestMapping("/api/type")
+public class TypeApiRestController {
+
 	@Autowired
-	private IArticleDao articleDao;
+	private ITypeDao typeDao;
 
 	@GetMapping("")
-	public List<Article> list() {
-		List<Article> articles = articleDao.findAll();
-		return articles;
+	public List<Type> list() {
+		List<Type> types = typeDao.findAll();
+		return types;
 	}
 
 	@GetMapping("/{id}")
-	public Article find(@PathVariable Long id) {
-		Optional<Article> optArticle = articleDao.findById(id);
+	public Type find(@PathVariable Long id) {
+		Optional<Type> optType = typeDao.findById(id);
 
-		if (optArticle.isPresent()) {
-			return optArticle.get();
+		if (optType.isPresent()) {
+			return optType.get();
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 	}
 
 	@PostMapping("")
-	public Article create(@RequestBody Article article) {
-		article = articleDao.save(article);
+	public Type create(@RequestBody Type type) {
+		type = typeDao.save(type);
 
-		return article;
+		return type;
 	}
 
 	@PutMapping("/{id}")
-	public Article update(@RequestBody Article article, @PathVariable Long id) {
-		if (!articleDao.existsById(id) || !id.equals(article.getId())) {
+	public Type update(@RequestBody Type type, @PathVariable Long id) {
+		if (!typeDao.existsById(id) || !id.equals(type.getId())) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
 
-		article = articleDao.save(article);
+		type = typeDao.save(type);
 
-		return article;
+		return type;
 	}
 
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
-		if (!articleDao.existsById(id)) {
+		if (!typeDao.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
 
-		articleDao.deleteById(id);
+		typeDao.deleteById(id);
 
-		if (articleDao.existsById(id)) {
+		if (typeDao.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Unable to find resource");
 		}
 	}
 
 }
-
-

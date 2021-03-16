@@ -1,4 +1,4 @@
-package m2i.formation.ap1;
+package m2i.formation.api;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,60 +14,60 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-
-import m2i.formation.dao.IMagasinDao;
-import m2i.formation.model.Magasin;
+import m2i.formation.dao.IAdresseDao;
+import m2i.formation.model.Adresse;
 
 @RestController
-@RequestMapping("/api/magasin")
-public class MagasinApiRestController {
+@RequestMapping("/api/adresse")
+public class AdresseApiRestController {
+
 	@Autowired
-	private IMagasinDao magasinDao;
+	private IAdresseDao adresseDao;
 
 	@GetMapping("")
-	public List<Magasin> list() {
-		List<Magasin> magasins = magasinDao.findAll();
-		return magasins;
+	public List<Adresse> list() {
+		List<Adresse> adresses = adresseDao.findAll();
+		return adresses;
 	}
 
 	@GetMapping("/{id}")
-	public Magasin find(@PathVariable Long id) {
-		Optional<Magasin> optMagasin = magasinDao.findById(id);
+	public Adresse find(@PathVariable Long id) {
+		Optional<Adresse> optAdresse = adresseDao.findById(id);
 
-		if (optMagasin.isPresent()) {
-			return optMagasin.get();
+		if (optAdresse.isPresent()) {
+			return optAdresse.get();
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 	}
 
 	@PostMapping("")
-	public Magasin create(@RequestBody Magasin magasin) {
-		magasin = magasinDao.save(magasin);
+	public Adresse create(@RequestBody Adresse adresse) {
+		adresse = adresseDao.save(adresse);
 
-		return magasin;
+		return adresse;
 	}
 
 	@PutMapping("/{id}")
-	public Magasin update(@RequestBody Magasin magasin, @PathVariable Long id) {
-		if (!magasinDao.existsById(id) || !id.equals(magasin.getId())) {
+	public Adresse update(@RequestBody Adresse adresse, @PathVariable Long id) {
+		if (!adresseDao.existsById(id) || !id.equals(adresse.getId())) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
 
-		magasin = magasinDao.save(magasin);
+		adresse = adresseDao.save(adresse);
 
-		return magasin;
+		return adresse;
 	}
 
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
-		if (!magasinDao.existsById(id)) {
+		if (!adresseDao.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
 
-		magasinDao.deleteById(id);
+		adresseDao.deleteById(id);
 
-		if (magasinDao.existsById(id)) {
+		if (adresseDao.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Unable to find resource");
 		}
 	}

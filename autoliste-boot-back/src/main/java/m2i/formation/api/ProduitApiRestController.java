@@ -1,4 +1,4 @@
-package m2i.formation.ap1;
+package m2i.formation.api;
 
 import java.util.List;
 import java.util.Optional;
