@@ -32,21 +32,21 @@ public class Article {
 		super();
 	}
 
-	public Article(String nom, long conditionement, long prix, Magasin fournisseur) {
+	public Article(String nom, long conditionement, long prix, Magasin magasin) {
 		super();
 		this.nom = nom;
 		this.conditionement = conditionement;
 		this.prix = prix;
-		this.magasin = fournisseur;
+		this.magasin = magasin;
 	}
 
-	public Article(long id, String nom, long conditionement, long prix, Magasin fournisseur) {
+	public Article(long id, String nom, long conditionement, long prix, Magasin magasin) {
 		super();
 		this.id = id;
 		this.nom = nom;
 		this.conditionement = conditionement;
 		this.prix = prix;
-		this.magasin = fournisseur;
+		this.magasin = magasin;
 	}
 
 	public long getId() {
@@ -81,18 +81,26 @@ public class Article {
 		this.prix = prix;
 	}
 
-	public Magasin getFournisseur() {
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+	public Magasin getMagasin() {
 		return magasin;
 	}
 
-	public void setFournisseur(Magasin fournisseur) {
-		this.magasin = fournisseur;
+	public void setMagasin(Magasin magasin) {
+		this.magasin = magasin;
 	}
 
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", nom=" + nom + ", conditionement=" + conditionement + ", prix=" + prix
-				+ ", fournisseur=" + magasin + "]";
+				+ ", magasin=" + magasin + "]";
 	}
 
 }
