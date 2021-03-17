@@ -1,4 +1,4 @@
-package m2i.formation.autolistebootback;
+package m2i.formation;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
