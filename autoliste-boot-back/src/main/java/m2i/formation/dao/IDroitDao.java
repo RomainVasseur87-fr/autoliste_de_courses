@@ -9,12 +9,12 @@ import m2i.formation.model.Droit;
 
 public interface IDroitDao extends JpaRepository<Droit, Long> {
 	
-	List<Droit> findByCanCreate(Boolean canCreate);
+	//List<Droit> findByCanCreate(Boolean canCreate);
 	
-	List<Droit> findByCanRead(Boolean canRead);
+	//List<Droit> findByCanRead(Boolean canRead);
 	
-	List<Droit> findByCanUpdate(Boolean canUpdate);
+	//List<Droit> findByCanUpdate(Boolean canUpdate);
 	
-	List<Droit> findByCanDelete(Boolean canDelete);
+	//List<Droit> findByCanDelete(Boolean canDelete);
 
 }
