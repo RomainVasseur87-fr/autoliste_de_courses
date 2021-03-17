@@ -10,13 +10,13 @@ import m2i.formation.model.Adresse;
 
 public interface IAdresseDao extends JpaRepository<Adresse, Long> {
 	
+	@Query("select a from adresse where a.ville =:ville")
+	List<Adresse> findByVille(@Param("ville")String ville);
 	
-	List<Adresse> findByVille(String ville);
-	
-	List<Adresse> findByCodePostal(String codePostal);
-	
+	@Query("select a from adresse where a.codePostal = :codePostal")
+	List<Adresse> findByCodePostal(@Param("codePostal")String codePostal);
+
 	@Query("select u.adresse from Utilisateur u where u.id = :id")
-	Adresse findByUtilisateur (@Param("id") long id);
-	
-	
+	Adresse findByUtilisateur(@Param("id") long id);
+
 }
