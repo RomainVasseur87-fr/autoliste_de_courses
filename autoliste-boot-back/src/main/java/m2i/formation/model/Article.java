@@ -21,9 +21,9 @@ public class Article {
 	@Column(name="nom")
 	private String nom;
 	@Column(name="conditionement")
-	private long conditionement;
+	private Long conditionement;
 	@Column(name="prix")
-	private long prix;
+	private Double prix;
 	@OneToOne
 	@JoinColumn (name = "magasin_id")
 	private Magasin magasin;
@@ -32,7 +32,7 @@ public class Article {
 		super();
 	}
 
-	public Article(String nom, long conditionement, long prix, Magasin magasin) {
+	public Article(String nom, Long conditionement, Double prix, Magasin magasin) {
 		super();
 		this.nom = nom;
 		this.conditionement = conditionement;
@@ -40,7 +40,7 @@ public class Article {
 		this.magasin = magasin;
 	}
 
-	public Article(long id, String nom, long conditionement, long prix, Magasin magasin) {
+	public Article(long id, String nom, Long conditionement, Double prix, Magasin magasin) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -73,11 +73,11 @@ public class Article {
 		this.conditionement = conditionement;
 	}
 
-	public long getPrix() {
+	public Double getPrix() {
 		return prix;
 	}
 
-	public void setPrix(long prix) {
+	public void setPrix(Double prix) {
 		this.prix = prix;
 	}
 
