@@ -40,6 +40,17 @@ public class UtilisateurApiRestController {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	@GetMapping("/type/{id}")
+	public Utilisateur findByType(@PathVariable Long id) {
+		Optional<Utilisateur> optUtilisateur = utilisateurDao.findById(id);
+
+		if (optUtilisateur.isPresent()) {
+			return optUtilisateur.get();
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+	}
 
 	@PostMapping("")
 	public Utilisateur create(@RequestBody Utilisateur utilisateur) {

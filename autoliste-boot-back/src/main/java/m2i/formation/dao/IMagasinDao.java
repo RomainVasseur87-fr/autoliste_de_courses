@@ -12,11 +12,11 @@ import m2i.formation.model.Magasin;
 public interface IMagasinDao extends JpaRepository<Magasin, Long> {
 	
 	//besoin du nom exacte
-	List<Magasin> findByNom (String nom);
+	//List<Magasin> findByNom (String nom);
 	//besoin d'un mot du nom (mettre % dans l'appel de la fonction)
-	@Query("select m from magasin m where m.nom like :nom")
-	List<Magasin> findByPartieNom (@Param("nom")String nom);
+	//@Query("select m from magasin m where m.nom like :nom")
+	//List<Magasin> findByPartieNom (@Param("nom")String nom);
 	
-	Magasin findByAdresse (Adresse adresse);
+	//Magasin findByAdresse (Adresse adresse);
 
 }
