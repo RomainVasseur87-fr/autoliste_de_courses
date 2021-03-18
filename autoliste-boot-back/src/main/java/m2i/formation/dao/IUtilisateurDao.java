@@ -20,7 +20,7 @@ public interface IUtilisateurDao extends JpaRepository<Utilisateur, Long> {
 	
 	//List<Utilisateur> findByEmail(String email);
 	
-	@Query("select u.utilisateur from Type t where t.id = :id")
-	Utilisateur findByType (@Param("id") long id);
+	//@Query("select u.utilisateur from Type t where t.id = :id")
+	//Utilisateur findByType (@Param("id") long id);
 	
 }
