@@ -81,4 +81,5 @@ public class Panier {
 		return "Panier [id=" + id + ", nom=" + nom + ", produits=" + produits + "]";
 	}
 
+
 }
