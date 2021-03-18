@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -23,7 +23,7 @@ public class Panier {
 	private int version;
 	@Column(name = "numero")
 	private String nom;
-	@OneToMany
+	@ManyToMany
 	@JoinTable(name = "panier_produits", joinColumns = @JoinColumn(name = "panier_id"), inverseJoinColumns = @JoinColumn(name = "produit_id"))
 	private List<Produit> produits;
 

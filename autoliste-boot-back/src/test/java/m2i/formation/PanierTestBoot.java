@@ -57,5 +57,4 @@ public class PanierTestBoot {
 		int endSize = panierDao.findByProduit(produit.getId()).size();
 		Assertions.assertEquals(1, endSize-startsize);
 	}
-
 }

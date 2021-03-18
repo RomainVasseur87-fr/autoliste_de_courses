@@ -29,7 +29,7 @@ public class AdresseApiRestController {
 		List<Adresse> adresses = adresseDao.findAll();
 		return adresses;
 	}
-	
+
 	@GetMapping("/{id}")
 	public Adresse find(@PathVariable Long id) {
 		Optional<Adresse> optAdresse = adresseDao.findById(id);
