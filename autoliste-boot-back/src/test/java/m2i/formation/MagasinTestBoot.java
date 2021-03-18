@@ -27,7 +27,6 @@ public class MagasinTestBoot {
 		magasin = magasinDao.save(magasin);
 		int endsize = magasinDao.findByNom("auchan").size();
 		Assertions.assertEquals(1, endsize - startsize);
-
 	}
 
 	@Test
@@ -36,9 +35,7 @@ public class MagasinTestBoot {
 		adresse = adresseDao.save(adresse);
 		Magasin magasin = new Magasin("auchan", adresse);
 		magasin = magasinDao.save(magasin);
-
 		Magasin magasinFind = magasinDao.findByAdresse(magasin.getAdresse().getId());
-
 		Assertions.assertNotNull(magasinFind);
 		Assertions.assertEquals(magasin.getId(), magasinFind.getId());
 	}

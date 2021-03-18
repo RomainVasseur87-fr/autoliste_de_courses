@@ -31,7 +31,7 @@ public class Produit {
 
 	public Produit() {
 		super();
-	}
+	} 
 
 	public Produit(String nom, long quantite, List<Categorie> categories) {
 		super();

@@ -17,7 +17,7 @@ public class Categorie {
 	@Version
 	private int version;
 	@Column(name = "nom", length = 255)
-	private String nom = null;
+	private String nom;
 	
 	public Categorie() {
 		super();
@@ -66,5 +66,5 @@ public class Categorie {
 	public String toString() {
 		return "Catégorie [id = " + this.getId() + ", nom = " + this.getNom() + "]";
 	}
-	
+
 }

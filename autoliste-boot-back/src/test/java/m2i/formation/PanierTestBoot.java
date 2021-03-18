@@ -24,9 +24,7 @@ public class PanierTestBoot {
 	public void panierfindById() {
 		Panier panier = new Panier("panier1",null);
 		panier = panierDao.save(panier);
-
 		Panier panierFind = panierDao.findById(panier.getId());
-
 		Assertions.assertNotNull(panierFind);
 		Assertions.assertEquals(panier.getId(), panierFind.getId());
 	}
@@ -35,10 +33,8 @@ public class PanierTestBoot {
 	public void panierfindByNom() {
 		Panier panier = new Panier("panier1",null);
 		panier = panierDao.save(panier);
-
 		List<Panier> paniersListe = panierDao.findByNom(panier.getNom());
 		Assertions.assertNotNull(paniersListe);
-		
 		for(Panier panierFind : paniersListe) {
 			Assertions.assertNotNull(panierFind);
 		Assertions.assertEquals(panier.getNom(), panierFind.getNom());
@@ -54,14 +50,12 @@ public class PanierTestBoot {
 		produit2 = produitDao.save(produit2);
 		Panier panier = new Panier("panier1",List.of(produit, produit2));
 		panier = panierDao.save(panier);
-		
 		List<Panier> paniersListe = panierDao.findByProduit(produit.getId());
 		for(Panier panierFind : paniersListe) {
 			Assertions.assertNotNull(panierFind);
 		}
 		int endSize = panierDao.findByProduit(produit.getId()).size();
 		Assertions.assertEquals(1, endSize-startsize);
-		
 	}
 
 }
