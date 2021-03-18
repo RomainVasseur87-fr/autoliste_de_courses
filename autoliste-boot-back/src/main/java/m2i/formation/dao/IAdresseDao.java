@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import m2i.formation.model.Adresse;
 
+
 public interface IAdresseDao extends JpaRepository<Adresse, Long> {
 	
 	@Query("select a from Adresse a where a.ville =:ville")
