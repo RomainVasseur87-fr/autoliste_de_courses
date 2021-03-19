@@ -11,15 +11,18 @@ import m2i.formation.model.Categorie;
 import m2i.formation.model.Produit;
 
 public interface ICategorieDao extends JpaRepository<Categorie, Long> {
-	//@Query("select c from Categorie c")
-	//List<Categorie> findAllCategories();
-	//@Query("select c from Categorie c where c.id = :id")
-	//Optional<Categorie> findById(Long id);
-	//@Query("select c from Categorie c where c.id = :id")
-	//List<Categorie> findCategoriesById(@Param("id") Long id);
-	//@Query("select c from Categorie c where c.nom = :nom")
-	//List<Categorie> findCategoriesByNom(String nom);
-	//@Query("select p from Produit p join p.categories i where i = :categorie")
-	//List<Produit> findProduitsByCategorie(@Param("categorie") Categorie categorie);
+	
+	@Query("select c from Categorie c")
+	List<Categorie> findAllCategories(); // OK.
+
+	@Query("select c from Categorie c where c.id = :id")
+	Optional<Categorie> findCategorieById(Long id); // OK. Mieux vaut mettre List ?
+		
+	@Query("select c from Categorie c where c.nom = :nom")
+	Optional<Categorie> findCategoriesByNom(String nom); // OK. Mieux vaut mettre List ?
+
+	@Query("select p from Produit p left join fetch p.categories i where i.id = :id")
+	List<Produit> findProduitsByCategorie(@Param("id") Long id); // OK.
+
 	//	List<Categorie> findCategoriesByProduit(Produit produit);
 }

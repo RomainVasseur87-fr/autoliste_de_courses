@@ -104,5 +104,63 @@ public class Recette {
 		return "Recette [id = " + this.getId() + ", nom = " + this.getNom() + ", nombre de convives = " + this.getnbConvives() + ", process = " + this.getProcess()
 				+ ", ingrédients =" + this.getIngredients() + ", thèmes = " + this.getThemes() + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((ingredients == null) ? 0 : ingredients.hashCode());
+		result = prime * result + ((nbConvives == null) ? 0 : nbConvives.hashCode());
+		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
+		result = prime * result + ((process == null) ? 0 : process.hashCode());
+		result = prime * result + ((themes == null) ? 0 : themes.hashCode());
+		result = prime * result + version;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Recette other = (Recette) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (ingredients == null) {
+			if (other.ingredients != null)
+				return false;
+		} else if (!ingredients.equals(other.ingredients))
+			return false;
+		if (nbConvives == null) {
+			if (other.nbConvives != null)
+				return false;
+		} else if (!nbConvives.equals(other.nbConvives))
+			return false;
+		if (nom == null) {
+			if (other.nom != null)
+				return false;
+		} else if (!nom.equals(other.nom))
+			return false;
+		if (process == null) {
+			if (other.process != null)
+				return false;
+		} else if (!process.equals(other.process))
+			return false;
+		if (themes == null) {
+			if (other.themes != null)
+				return false;
+		} else if (!themes.equals(other.themes))
+			return false;
+		if (version != other.version)
+			return false;
+		return true;
+	}
 	
 }
