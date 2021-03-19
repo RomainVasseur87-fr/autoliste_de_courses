@@ -53,7 +53,7 @@ public class CommandeApiRestController {
 
 	@GetMapping("/{id}")
 	public Commande find(@PathVariable Long id) {
-		Optional<Commande> optCommande = commandeDao.findById(id);
+		Optional<Commande> optCommande = commandeDao.findCommandeById(id);
 
 		if (optCommande.isPresent()) {
 			return optCommande.get();
