@@ -35,7 +35,7 @@ public class AdresseApiRestController {
 		List<Adresse> adresses = adresseDao.findByVille(ville);
 		return adresses;
 	}
-	@GetMapping("/codepostal/{coePostal}")
+	@GetMapping("/codepostal/{codePostal}")
 	public List<Adresse> findByCodePostal(@PathVariable String codePostal){
 		List<Adresse> adresses = adresseDao.findByCodePostal(codePostal);
 		return adresses;
