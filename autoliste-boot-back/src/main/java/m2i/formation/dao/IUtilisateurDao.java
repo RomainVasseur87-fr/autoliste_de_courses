@@ -9,12 +9,12 @@ import m2i.formation.model.Type;
 import m2i.formation.model.Utilisateur;
 
 public interface IUtilisateurDao extends JpaRepository<Utilisateur, Long> {
-	List<Utilisateur> findByType(Type type);
-
-	List<Utilisateur> findByAdresse(Adresse adresse);
-	
-	List<Utilisateur> findByNom(String nom);
-	
-	List<Utilisateur> findByEmail(String email);
+//	List<Utilisateur> findByType(Type type);
+//
+//	List<Utilisateur> findByAdresse(Adresse adresse);
+//	
+//	List<Utilisateur> findByNom(String nom);
+//	
+//	List<Utilisateur> findByEmail(String email);
 	
 }

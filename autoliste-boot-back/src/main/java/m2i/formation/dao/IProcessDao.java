@@ -11,16 +11,21 @@ import m2i.formation.model.Process;
 import m2i.formation.model.Recette;
 
 public interface IProcessDao extends JpaRepository<Process, Long> {
+	
 	@Query("select p from Process p")
-	List<Process> findAllProcess();
-	Optional<Process> findById(Long id);
+	List<Process> findAllProcess(); // OK.
+	
 	@Query("select p from Process p where p.id = :id")
-	Process findProcessById(@Param("id") Long id);
+	Optional<Process> findProcessById(@Param("id") Long id); // OK.
+	
 	@Query("select p from Process p where p.description = :description")
-	List<Process> findProcessByDescription(@Param("description") String description);
+	Optional<Process> findProcessByDescription(@Param("description") String description); // OK. Mieux vaut mettre List ?
+	
 	@Query("select p from Process p where p.nom = :nom")
-	List<Process> findProcessByNom(@Param("nom") String nom);
+	Optional<Process> findProcessByNom(@Param("nom") String nom); // OK. Mieux vaut mettre List ?
+	
 	@Query("select r from Recette r where r.process = :process")
-	Recette findRecetteByProcess(@Param("process") Process process);
+	Recette findRecetteByProcess(@Param("process") Process process); // OK.
+	
 //	Process findProcessByRecette(Recette recette);
 }
