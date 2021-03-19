@@ -29,6 +29,46 @@ public class MagasinApiRestController {
 		List<Magasin> magasins = magasinDao.findAll();
 		return magasins;
 	}
+	@GetMapping("/nom/{nom}")
+	public List<Magasin> findByNom(@PathVariable String nom) {
+		List<Magasin> magasins = magasinDao.findByNom(nom);
+
+		if (!magasins.isEmpty()) {
+			return magasins;
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+	}
+	@GetMapping("/partienom/{nom}")
+	public List<Magasin> findByPartieNom(@PathVariable String nom) {
+		List<Magasin> magasins = magasinDao.findByPartieNom(nom);
+
+		if (!magasins.isEmpty()) {
+			return magasins;
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+	}
+	@GetMapping("/adresse/{id}")
+	public Magasin findByAdresse(@PathVariable Long id) {
+		Optional<Magasin> optMagasin = magasinDao.findMagasinByAdresse(id);
+
+		if (optMagasin.isPresent()) {
+			return optMagasin.get();
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+	}
+	@GetMapping("/ville/{ville}")
+	public List<Magasin> findByVille(@PathVariable String ville) {
+		List<Magasin> magasins = magasinDao.findByVille(ville);
+
+		if (!magasins.isEmpty()) {
+			return magasins;
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+	}
 
 	@GetMapping("/{id}")
 	public Magasin find(@PathVariable Long id) {

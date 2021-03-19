@@ -40,6 +40,26 @@ public class PanierApiRestController {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 	}
+	@GetMapping("/nom/{nom}")
+	public List<Panier> findByNom(@PathVariable String nom) {
+		List<Panier> paniers = panierDao.findByNom(nom);
+
+		if (!paniers.isEmpty()) {
+			return paniers;
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+	}
+	@GetMapping("/produit/{id}")
+	public List<Panier> findByProduit(@PathVariable long id) {
+		List<Panier> paniers = panierDao.findByProduit(id);
+
+		if (!paniers.isEmpty()) {
+			return paniers;
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+	}
 
 	@PostMapping("")
 	public Panier create(@RequestBody Panier panier) {

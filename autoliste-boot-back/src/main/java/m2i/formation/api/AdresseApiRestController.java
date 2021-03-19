@@ -29,6 +29,22 @@ public class AdresseApiRestController {
 		List<Adresse> adresses = adresseDao.findAll();
 		return adresses;
 	}
+	
+	@GetMapping("/ville/{ville}")
+	public List<Adresse> findByVille(@PathVariable String ville){
+		List<Adresse> adresses = adresseDao.findByVille(ville);
+		return adresses;
+	}
+	@GetMapping("/codepostal/{coePostal}")
+	public List<Adresse> findByCodePostal(@PathVariable String codePostal){
+		List<Adresse> adresses = adresseDao.findByCodePostal(codePostal);
+		return adresses;
+	}
+	@GetMapping("/utilisateur/{id}")
+	public Adresse findByUtilisateur(@PathVariable long id){
+		Adresse adresse = adresseDao.findByUtilisateur(id);
+		return adresse;
+	}
 
 	@GetMapping("/{id}")
 	public Adresse find(@PathVariable Long id) {
