@@ -1,5 +1,6 @@
 package m2i.formation.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -27,12 +28,18 @@ public class Produit {
 	private long quantite;
 	@ManyToMany
 	@JoinTable(name = "produit_categories", joinColumns = @JoinColumn(name = "produit_id"), inverseJoinColumns = @JoinColumn(name = "categorie_id"))
-	private List<Categorie> categories;
+	private List<Categorie> categories = new ArrayList<Categorie>();
 
 	public Produit() {
 		super();
 	} 
 
+	public Produit(String nom, long quantite) {
+		super();
+		this.nom = nom;
+		this.quantite = quantite;
+	}
+	
 	public Produit(String nom, long quantite, List<Categorie> categories) {
 		super();
 		this.nom = nom;
@@ -78,6 +85,10 @@ public class Produit {
 
 	public void setCategories(List<Categorie> categories) {
 		this.categories = categories;
+	}
+	
+	public void addCategorie(Categorie categorie) {
+		this.categories.add(categorie);
 	}
 
 	public int getVersion() {
