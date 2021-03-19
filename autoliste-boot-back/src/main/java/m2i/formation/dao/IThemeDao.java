@@ -11,13 +11,17 @@ import m2i.formation.model.Recette;
 import m2i.formation.model.Theme;
 
 public interface IThemeDao extends JpaRepository<Theme, Long> {
-	//@Query("select t from Theme t")
-	//List<Theme> findAllThemes();
-	//@Query("select t from Theme t where t.id = :id")
-	//Optional<Theme> findThemesById(@Param("id") Long id);
-	//@Query("select t from Theme t where t.nom = :nom")
-	//List<Theme> findThemesByNom(String nom);
-	//@Query("select r from Recette r join r.themes i where i = :theme")
-	//List<Recette> findRecettesByTheme(@Param("theme") Theme theme);
-	//	List<Theme> findThemesByRecette(Recette recette);
+	
+	@Query("select t from Theme t")
+	List<Theme> findAllThemes(); // OK.
+	
+	@Query("select t from Theme t where t.id = :id")
+	Optional<Theme> findThemesById(@Param("id") Long id); // OK.
+	
+	@Query("select t from Theme t where t.nom = :nom") // OK.
+	List<Theme> findThemesByNom(String nom);
+	
+//	@Query("select r from Recette r join r.themes i where i = :theme")
+//	List<Recette> findRecettesByTheme(@Param("theme") Theme theme);
+//	List<Theme> findThemesByRecette(Recette recette);
 }
