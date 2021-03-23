@@ -40,7 +40,13 @@ public class ThemeApiRestController {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 	}
-
+	
+	@GetMapping("/nom/{nom}")
+	public List<Theme> findThemesByNom(@PathVariable String nom) {
+		List<Theme> optTheme = themeDao.findThemesByNom(nom);
+		return optTheme;
+	}
+	
 	@PostMapping("")
 	public Theme create(@RequestBody Theme theme) {
 		theme = themeDao.save(theme);

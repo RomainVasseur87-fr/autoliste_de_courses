@@ -99,6 +99,14 @@ public class Recette {
 		this.themes = themes;
 	}
 
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
 	@Override
 	public String toString() {
 		return "Recette [id = " + this.getId() + ", nom = " + this.getNom() + ", nombre de convives = " + this.getnbConvives() + ", process = " + this.getProcess()

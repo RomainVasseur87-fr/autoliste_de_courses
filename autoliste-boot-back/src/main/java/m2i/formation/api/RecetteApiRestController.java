@@ -40,7 +40,49 @@ public class RecetteApiRestController {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	@GetMapping("/nom/{nom}")
+	public List<Recette> findRecettesByNom(@PathVariable String nom) {
+		List<Recette> optRecette = recetteDao.findRecettesByNom(nom);
+		return optRecette;
+	}
+	
+	@GetMapping("/ingredient/{id}")
+	public List<Recette> findRecettesByIngredient(@PathVariable Long id) {
+		List<Recette> optRecette = recetteDao.findRecettesByIngredient(id);
+		return optRecette;
+	}
 
+	@GetMapping("/nb-convives/{nombre}")
+	public List<Recette> findRecettesByNbConvives(@PathVariable Long nombre) {
+		List<Recette> optRecette = recetteDao.findRecettesByNbConvives(nombre);
+		return optRecette;
+	}
+	
+	@GetMapping("/process/{id}")
+	public List<Recette> findMyRecettesByProcess(@PathVariable Long id) {
+		List<Recette> optRecette = recetteDao.findRecettesByProcess(id);
+		return optRecette;
+	}
+	
+	@GetMapping("/nb-convives-greater-than/{nbConvives}")
+	public List<Recette> findRecettesByNbConvivesGreaterThan(@PathVariable Long nbConvives) {
+		List<Recette> optRecette = recetteDao.findRecettesByNbConvivesGreaterThan(nbConvives);
+		return optRecette;
+	}
+	
+	@GetMapping("/nb-convives-smaller-than/{nbConvives}")
+	public List<Recette> findRecettesByNbConvivesSmallerThan(@PathVariable Long nbConvives) {
+		List<Recette> optRecette = recetteDao.findRecettesByNbConvivesSmallerThan(nbConvives);
+		return optRecette;
+	}
+	
+	@GetMapping("/theme/{id}")
+	public List<Recette> findRecettesByTheme(@PathVariable Long id) {
+		List<Recette> optRecette = recetteDao.findRecettesByTheme(id);
+		return optRecette;
+	}
+	
 	@PostMapping("")
 	public Recette create(@RequestBody Recette recette) {
 		recette = recetteDao.save(recette);
