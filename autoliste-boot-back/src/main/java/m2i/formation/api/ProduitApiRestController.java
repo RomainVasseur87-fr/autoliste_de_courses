@@ -30,6 +30,26 @@ public class ProduitApiRestController {
 		List<Produit> produits = produitDao.findAll();
 		return produits;
 	}
+	@GetMapping("/nom/{nom}")
+	public List<Produit> findByNom(@PathVariable String nom) {
+		List<Produit> produits = produitDao.findByNom(nom);
+
+		if (!produits.isEmpty()) {
+			return produits;
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+	}
+	@GetMapping("/categorie/{id}")
+	public List<Produit> findByCategorie(@PathVariable Long id) {
+		List<Produit> produits = produitDao.findByCategorie(id);
+
+		if (!produits.isEmpty()) {
+			return produits;
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+	}
 
 	@GetMapping("/{id}")
 	public Produit find(@PathVariable Long id) {

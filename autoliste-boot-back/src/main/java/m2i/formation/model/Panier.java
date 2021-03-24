@@ -81,5 +81,42 @@ public class Panier {
 		return "Panier [id=" + id + ", nom=" + nom + ", produits=" + produits + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
+		result = prime * result + ((produits == null) ? 0 : produits.hashCode());
+		result = prime * result + version;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Panier other = (Panier) obj;
+		if (id != other.id)
+			return false;
+		if (nom == null) {
+			if (other.nom != null)
+				return false;
+		} else if (!nom.equals(other.nom))
+			return false;
+		if (produits == null) {
+			if (other.produits != null)
+				return false;
+		} else if (!produits.equals(other.produits))
+			return false;
+		if (version != other.version)
+			return false;
+		return true;
+	}
+
 
 }

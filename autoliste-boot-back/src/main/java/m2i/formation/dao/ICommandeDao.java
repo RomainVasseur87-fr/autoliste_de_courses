@@ -2,6 +2,7 @@ package m2i.formation.dao;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,8 +12,8 @@ import m2i.formation.model.Commande;
 
 public interface ICommandeDao extends JpaRepository<Commande, Long> {
 	
-	@Query("select c from Commande c where c.id = :id")
-	Commande findById(@Param("id")long id);
+	@Query("select c from Commande c left join fetch c.articles where c.id = :id")
+	Optional<Commande> findCommandeById(@Param("id")long id);
 	
 	@Query("select c from Commande c where c.nom = :nom")
 	List<Commande> findByNom(@Param("nom")String nom);

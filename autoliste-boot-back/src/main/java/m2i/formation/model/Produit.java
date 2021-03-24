@@ -104,4 +104,44 @@ public class Produit {
 		return "Produit [id=" + id + ", nom=" + nom + ", quantite=" + quantite + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((categories == null) ? 0 : categories.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
+		result = prime * result + (int) (quantite ^ (quantite >>> 32));
+		result = prime * result + version;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Produit other = (Produit) obj;
+		if (categories == null) {
+			if (other.categories != null)
+				return false;
+		} else if (!categories.equals(other.categories))
+			return false;
+		if (id != other.id)
+			return false;
+		if (nom == null) {
+			if (other.nom != null)
+				return false;
+		} else if (!nom.equals(other.nom))
+			return false;
+		if (quantite != other.quantite)
+			return false;
+		if (version != other.version)
+			return false;
+		return true;
+	}
+
 }
