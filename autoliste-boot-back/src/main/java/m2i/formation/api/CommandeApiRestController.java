@@ -30,10 +30,30 @@ public class CommandeApiRestController {
 		List<Commande> commandes = commandeDao.findAll();
 		return commandes;
 	}
+	@GetMapping("/nom/{nom}")
+	public List<Commande> findByNom(@PathVariable String nom) {
+		List<Commande> commandes = commandeDao.findByNom(nom);
+
+		if (!commandes.isEmpty()) {
+			return commandes;
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+	}
+	@GetMapping("/article/{id}")
+	public List<Commande> findByArticle(@PathVariable long id) {
+		List<Commande> commandes = commandeDao.findByArticle(id);
+
+		if (!commandes.isEmpty()) {
+			return commandes;
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+	}
 
 	@GetMapping("/{id}")
 	public Commande find(@PathVariable Long id) {
-		Optional<Commande> optCommande = commandeDao.findById(id);
+		Optional<Commande> optCommande = commandeDao.findCommandeById(id);
 
 		if (optCommande.isPresent()) {
 			return optCommande.get();

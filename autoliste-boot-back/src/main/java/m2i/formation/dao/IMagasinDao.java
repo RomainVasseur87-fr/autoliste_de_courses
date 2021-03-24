@@ -1,6 +1,7 @@
 package m2i.formation.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,7 +19,7 @@ public interface IMagasinDao extends JpaRepository<Magasin, Long> {
 	List<Magasin> findByPartieNom (@Param("nom")String nom);
 	
 	@Query("select m from Magasin m left join fetch m.adresse where m.adresse.id = :id")
-	Magasin findByAdresse (@Param("id") Long id);
+	Optional<Magasin> findMagasinByAdresse (@Param("id") Long id);
 	
 	@Query("select m from Magasin m left join fetch m.adresse where m.adresse.ville = :ville")
 	List<Magasin> findByVille (@Param("ville")String ville);

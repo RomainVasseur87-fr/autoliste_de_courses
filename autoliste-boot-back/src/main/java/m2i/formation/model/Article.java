@@ -103,4 +103,53 @@ public class Article {
 				+ ", magasin=" + magasin + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((conditionement == null) ? 0 : conditionement.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((magasin == null) ? 0 : magasin.hashCode());
+		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
+		result = prime * result + ((prix == null) ? 0 : prix.hashCode());
+		result = prime * result + version;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Article other = (Article) obj;
+		if (conditionement == null) {
+			if (other.conditionement != null)
+				return false;
+		} else if (!conditionement.equals(other.conditionement))
+			return false;
+		if (id != other.id)
+			return false;
+		if (magasin == null) {
+			if (other.magasin != null)
+				return false;
+		} else if (!magasin.equals(other.magasin))
+			return false;
+		if (nom == null) {
+			if (other.nom != null)
+				return false;
+		} else if (!nom.equals(other.nom))
+			return false;
+		if (prix == null) {
+			if (other.prix != null)
+				return false;
+		} else if (!prix.equals(other.prix))
+			return false;
+		if (version != other.version)
+			return false;
+		return true;
+	}
+
 }

@@ -30,6 +30,51 @@ public class ArticleApiRestController {
 		List<Article> articles = articleDao.findAll();
 		return articles;
 	}
+	@GetMapping("/nom/{nom}")
+	public List<Article> findByNom(@PathVariable String nom) {
+		List<Article> articles = articleDao.findByNom(nom);
+		if (!articles.isEmpty()) {
+			return articles;
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+	}
+	@GetMapping("/prix/{prix}")
+	public List<Article> findByNom(@PathVariable Double prix) {
+		List<Article> articles = articleDao.findByPrix(prix);
+		if (!articles.isEmpty()) {
+			return articles;
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+	}
+	@GetMapping("/magasin/{nom}")
+	public List<Article> findByMagasinNom(@PathVariable String nom) {
+		List<Article> articles = articleDao.findByMagasinNom(nom);
+		if (!articles.isEmpty()) {
+			return articles;
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+	}
+	@GetMapping("/prixInf/{prixInf}")
+	public List<Article> findByPrixInf(@PathVariable Double prixInf) {
+		List<Article> articles = articleDao.findByPrixInf(prixInf);
+		if (!articles.isEmpty()) {
+			return articles;
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+	}
+	@GetMapping("/prixSup/{prixSup}")
+	public List<Article> findByPrixSup(@PathVariable Double prixSup) {
+		List<Article> articles = articleDao.findByPrixSup(prixSup);
+		if (!articles.isEmpty()) {
+			return articles;
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+	}
 
 	@GetMapping("/{id}")
 	public Article find(@PathVariable Long id) {

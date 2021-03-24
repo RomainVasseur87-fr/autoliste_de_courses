@@ -1,6 +1,7 @@
 package m2i.formation;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -35,9 +36,11 @@ public class MagasinTestBoot {
 		adresse = adresseDao.save(adresse);
 		Magasin magasin = new Magasin("auchan", adresse);
 		magasin = magasinDao.save(magasin);
-		Magasin magasinFind = magasinDao.findByAdresse(magasin.getAdresse().getId());
+		Optional<Magasin> magasinFind = magasinDao.findMagasinByAdresse(magasin.getAdresse().getId());
 		Assertions.assertNotNull(magasinFind);
-		Assertions.assertEquals(magasin.getId(), magasinFind.getId());
+		if (magasinFind.isPresent()) {
+			Assertions.assertEquals(magasin.getId(), magasinFind.get().getId());
+		}
 	}
 	
 	@Test

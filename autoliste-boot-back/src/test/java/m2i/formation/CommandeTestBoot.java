@@ -1,11 +1,14 @@
 package m2i.formation;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import m2i.formation.dao.IArticleDao;
 import m2i.formation.dao.ICommandeDao;
@@ -23,8 +26,12 @@ public class CommandeTestBoot {
 	public void commandefindById() {
 		Commande commande = new Commande("commande01",null);
 		commande = commandeDao.save(commande);
-		Commande commandeFind = commandeDao.findById(commande.getId());
-		Assertions.assertEquals(commande.getId(), commandeFind.getId());
+		Optional<Commande> commandeFind = commandeDao.findCommandeById(commande.getId());
+		if (commandeFind.isPresent()) {
+		Assertions.assertEquals(commande.getId(), commandeFind.get().getId());
+		}else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
 	}
 	
 	@Test
