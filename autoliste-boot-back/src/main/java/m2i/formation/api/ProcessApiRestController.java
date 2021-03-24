@@ -40,7 +40,19 @@ public class ProcessApiRestController {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	@GetMapping("nom/{nom}")
+	public List<Process> findProcessByNom(@PathVariable String nom) {
+		List<Process> optProcess = processDao.findProcessByNom(nom);
+		return optProcess;
+	}
 
+	@GetMapping("description/{description}")
+	public List<Process> findProcessByDescription(@PathVariable String description) {
+		List<Process> optProcess = processDao.findProcessByDescription(description);
+		return optProcess;
+	}
+	
 	@PostMapping("")
 	public Process create(@RequestBody Process process) {
 		process = processDao.save(process);

@@ -54,6 +54,14 @@ public class Theme {
 		this.nom = nom;
 	}
 	
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
 	@Override
 	public String toString() {
 		return "Thème [id = " + this.getId() + ", nom = " + this.getNom() + "]";

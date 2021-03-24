@@ -3,7 +3,6 @@ package m2i.formation;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,8 @@ import m2i.formation.model.Recette;
 import m2i.formation.model.Theme;
 
 @SpringBootTest
-class MohamedBootTests {
+
+class DAOTests {
 
 	@Autowired
 	IProcessDao processDao;
@@ -68,48 +68,39 @@ class MohamedBootTests {
 	public void processFindProcessById() {
 		Process process1 = new Process("Process 10", "Description 10");
 		process1 = processDao.save(process1);
-		Optional<Process> listeProcess1 = processDao.findById(process1.getId());
-		Optional<Process> listeProcess2 = processDao.findProcessById(process1.getId());
-		assertEquals(listeProcess1, listeProcess2);
+		Long identifiant1 = process1.getId();
+		
+		Process process2 = processDao.findById(identifiant1).get();
+		Long identifiant2 = process2.getId();
+		
+		assertEquals(identifiant1, identifiant2);
 	}
 	
 	@Test
 	public void processFindProcessByDescription() {
 		double nombre = Math.random();
 		String description = "Description " + nombre;
+		List<Process> process1 = processDao.findProcessByDescription(description);
+		
 		process = new Process("Process", description);
 		process = processDao.save(process);
-		Process process2 = processDao.findProcessByDescription(process.getDescription()).get();
-		assertEquals(process, process2);
+		List<Process> process2 = processDao.findProcessByDescription(description);
+		assertEquals(process2.size() - process1.size() , 1);
 	}
 	
 	@Test
 	public void processFindProcessByNom() {
 		double nombre = Math.random();
 		String nom = "Process " + nombre;
+		List<Process> process1 = processDao.findProcessByNom(nom);
+		
 		process = new Process(nom, "Description");
 		process = processDao.save(process);
-		Process process2 = processDao.findProcessByNom(process.getNom()).get();
-		assertEquals(process, process2);
+		List<Process> process2 = processDao.findProcessByNom(nom);
+		
+		assertEquals(process2.size(), process1.size() + 1);
 	}
 	
-	@Test
-	public void processfindRecetteByProcess() {
-		double nombre = Math.random();
-		String nom = "Process " + nombre;
-		process = new Process(nom, "Description");
-		process = processDao.save(process);
-		
-		Recette recette1 = new Recette();
-		recette1.setNom("Recette 1");
-		recette1.setnbConvives(12L);
-		recette1.setProcess(process);
-		recette1 = recetteDao.save(recette1);
-		
-		Recette recette2 = processDao.findRecetteByProcess(process);
-		assertEquals(recette1.getId(), recette2.getId());
-	}
-		
 //**************************************** Tests de la catégorie. ****************************************
 	
 	@Test
@@ -139,48 +130,30 @@ class MohamedBootTests {
 	
 	@Test
 	public void categorieFindCategorieById() {
-		Categorie categorie = new Categorie("Catégorie");
-		categorie = categorieDao.save(categorie);
-		Optional<Categorie> categorie1 = categorieDao.findById(categorie.getId());
-		Optional<Categorie> categorie2 = categorieDao.findCategorieById(categorie.getId());
-		assertEquals(categorie1, categorie2);
+		Categorie categorie1 = new Categorie("Catégorie");
+		categorie1 = categorieDao.save(categorie1);
+		Long identifiant1 = categorie1.getId();
+		
+		Categorie categorie2 = categorieDao.findById(identifiant1).get();
+		Long identifiant2 = categorie2.getId();
+		
+		assertEquals(identifiant1, identifiant2);
 	}
 	
 	@Test
 	public void categorieFindcategorieByNom() {
 		double nombre = Math.random();
 		String nom = "Catégorie " + nombre;
+		List<Categorie> categorie1 = categorieDao.findCategoriesByNom(nom);
+		
 		Categorie categorie = new Categorie(nom);
 		categorie = categorieDao.save(categorie);
-		Categorie categorie2 = categorieDao.findCategoriesByNom(nom).get();
-		assertEquals(categorie, categorie2);
-	}
-	
-	@Test
-	public void categorieFindProduitsByCategorie() {
-		Categorie categorie1 = new Categorie("Légumes");
-		Categorie categorie2 = new Categorie("Viande");
-		Categorie categorie3 = new Categorie("Lait");
+		int nombre1 = categorie1.size();
 		
-		categorie1 = categorieDao.save(categorie1);
-		categorie2 = categorieDao.save(categorie2);
-		categorie3 = categorieDao.save(categorie3);
+		List<Categorie> categorie2 = categorieDao.findCategoriesByNom(nom);
+		int nombre2 = categorie2.size();
 		
-		int debutSize = categorieDao.findProduitsByCategorie(categorie1.getId()).size();
-		
-		Produit produit1 = new Produit("Produit 1", 0);
-		produit1.addCategorie(categorie1);
-		produit1.addCategorie(categorie2);
-		produit1.addCategorie(categorie3);
-		produit1 = produitDao.save(produit1);
-	
-		Produit produit2 = new Produit("Produit 2", 0);
-		produit2.addCategorie(categorie2);
-		produit2.addCategorie(categorie3);
-		produit2 = produitDao.save(produit2);
-		
-		int finSize = categorieDao.findProduitsByCategorie(categorie1.getId()).size();
-		assertEquals(1, finSize - debutSize);
+		assertEquals(nombre2 - nombre1, 1);
 	}
 	
 //**************************************** Tests du thème. ****************************************
@@ -214,12 +187,14 @@ class MohamedBootTests {
 	
 	@Test
 	public void themeFindThemesById() {
-		Theme theme = new Theme("Thème");
-		theme = themeDao.save(theme);
-		Optional<Theme> theme1 = themeDao.findById(theme.getId());
-		Optional<Theme> theme2 = themeDao.findThemesById(theme.getId());
-		assertEquals(theme1, theme2);
-
+		Theme theme1 = new Theme("Thème");
+		theme1 = themeDao.save(theme1);
+		Long identifiant1 = theme1.getId();
+		
+		Theme theme2 = themeDao.findById(identifiant1).get();
+		Long identifiant2 = theme2.getId();
+		
+		assertEquals(identifiant1, identifiant2);
 	}
 	
 	@Test
@@ -260,6 +235,42 @@ class MohamedBootTests {
 	}
 	
 	@Test
+	public void recetteFindRecettesById() {
+		Recette recette1;
+		recette1 = new Recette();
+		recette1.setNom("Recette 1234567890");
+		recette1.setnbConvives(5L);		
+		recette1 = recetteDao.save(recette1);
+
+		Long identifiant1 = recette1.getId();
+		
+		Recette recette2 = recetteDao.findById(identifiant1).get();
+		Long identifiant2 = recette2.getId();
+		
+		assertEquals(identifiant1, identifiant2);
+	}
+	
+	@Test
+	public void recetteFindRecettesByNom() {
+		
+		double nombre = Math.random();
+		String nom = "Recette " + nombre;
+
+		List<Recette> recettes1 = recetteDao.findRecettesByNom(nom);
+		int identifiant1 = recettes1.size();
+		
+		Recette recette1;
+		recette1 = new Recette();
+		recette1.setNom(nom);
+		recette1.setnbConvives(5L);		
+		recette1 = recetteDao.save(recette1);
+
+		List<Recette> recettes2 = recetteDao.findRecettesByNom(nom);
+		int identifiant2 = recettes2.size();
+		assertEquals(identifiant2 - identifiant1, 1);
+	}
+	
+	@Test
 	public void RecetteFindRecettesByIngredient() {
 		double nombre = Math.random();
 		String nom = "Produit " + nombre;
@@ -270,18 +281,25 @@ class MohamedBootTests {
 		recette.setnbConvives(6L);
 		recette.setIngerients(List.of(produit));
 		recette = recetteDao.save(recette);
-		List<Recette> recettes = recetteDao.findRecettesByIngredient(produit);
+		List<Recette> recettes = recetteDao.findRecettesByIngredient(produit.getId());
 		assertEquals(recettes.size(), 1);		
 	}
 
 	@Test
 	public void RecetteFindRecettesByNbConvives() {
+		Long nbConvives = 40000000000L;
+		List<Recette> recettes1 = recetteDao.findRecettesByNbConvives(nbConvives);
+		int taille1 = recettes1.size();		
+		
 		Recette recette = new Recette();
 		recette.setNom("Ma recette");
-		recette.setnbConvives(40000000000L); // À changer à chaque test unitaire.
+		recette.setnbConvives(nbConvives);
 		recette = recetteDao.save(recette);
-		List<Recette> recettes = recetteDao.findRecettesByNbConvives(recette.getnbConvives());
-		assertEquals(recettes.size(), 1);		
+		
+		List<Recette> recettes2 = recetteDao.findRecettesByNbConvives(nbConvives);
+		int taille2 = recettes2.size();		
+
+		assertEquals(taille2 - taille1, 1);		
 	}
 
 	@Test
@@ -293,34 +311,65 @@ class MohamedBootTests {
 		Recette recette = new Recette();
 		recette.setProcess(process);
 		recette = recetteDao.save(recette);
-		List<Recette> recettes = recetteDao.findMyRecettesByProcess(process);
+		List<Recette> recettes = recetteDao.findRecettesByProcess(process.getId());
 		assertEquals(recettes.size(), 1);		
 	}
 	
 	@Test
 	public void RecetteFindRecettesByNbConvivesGreaterThan() {
-		Long nbConvives = 50000000000000L; // À changer à chaque test unitaire.
+		Long nbConvives = 100L;
+		List<Recette> recettes1 = recetteDao.findRecettesByNbConvivesGreaterThan(nbConvives);
+		int nombre1 = recettes1.size();
+		
 		Recette recette = new Recette();
 		recette.setnbConvives(nbConvives);
 		recette = recetteDao.save(recette);
-		List<Recette> recettes = recetteDao.findRecettesByNbConvivesGreaterThan(nbConvives);
-		assertEquals(recettes.size(), 1);		
+		
+		List<Recette> recettes2 = recetteDao.findRecettesByNbConvivesGreaterThan(nbConvives);
+		int nombre2 = recettes2.size();
+		assertEquals(nombre2 - nombre1, 1);		
 	}
 
 	@Test
 	public void RecettefindRecettesByNbConvivesSmallerThan() {
-		List<Recette> recettes = recetteDao.findAll();
-		for (int index = 0 ; index < recettes.size() ; index++) {
-			Recette recette = recettes.get(index);
-			recette.setnbConvives(100L);
-			recette = recetteDao.save(recette);
-		}
-		Long nbConvives = 0L;
+		Long nbConvives = 100L;
+		List<Recette> recettes1 = recetteDao.findRecettesByNbConvivesSmallerThan(nbConvives);
+		int nombre1 = recettes1.size();
+		
 		Recette recette = new Recette();
 		recette.setnbConvives(nbConvives);
 		recette = recetteDao.save(recette);
-		recettes = recetteDao.findRecettesByNbConvivesSmallerThan(nbConvives);
-		assertEquals(recettes.size(), 1);		
+		
+		List<Recette> recettes2 = recetteDao.findRecettesByNbConvivesSmallerThan(nbConvives);
+		int nombre2 = recettes2.size();
+		assertEquals(nombre2 - nombre1, 1);
 	}
-
+	
+	@Test
+	public void RecetteFindRecettesByTheme() {
+		Theme theme1 = new Theme("AAAAA1");
+		theme1 = themeDao.save(theme1);
+		Theme theme2 = new Theme("BBBBB2");
+		theme2 = themeDao.save(theme2);
+		Theme theme3 = new Theme("CCCCC3");
+		theme3 = themeDao.save(theme3);
+		Theme theme4 = new Theme("DDDDD4");
+		theme4 = themeDao.save(theme4);
+		Theme theme5 = new Theme("EEEEE5");
+		theme5 = themeDao.save(theme5);
+		
+		int nombre1 = recetteDao.findRecettesByTheme(theme1.getId()).size();
+		
+		Recette recette;
+		recette = new Recette();
+		recette.setNom("Recette 1234567890");
+		recette.setThemes(List.of(theme1, theme2, theme3, theme4, theme5));
+		
+		recette = recetteDao.save(recette);
+			
+		int nombre2 = recetteDao.findRecettesByTheme(theme1.getId()).size();
+		
+		assertEquals(nombre2 - nombre1, 1);
+	}
+	
 }

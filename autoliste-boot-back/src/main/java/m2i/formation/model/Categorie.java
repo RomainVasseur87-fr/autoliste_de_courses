@@ -46,6 +46,14 @@ public class Categorie {
 		this.id = id;
 	}
 	
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+	
 	public String getNom() {
 		return nom;
 	}
@@ -54,14 +62,6 @@ public class Categorie {
 		this.nom = nom;
 	}
 	
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
-	}
-
 	@Override
 	public String toString() {
 		return "Catégorie [id = " + this.getId() + ", nom = " + this.getNom() + "]";
