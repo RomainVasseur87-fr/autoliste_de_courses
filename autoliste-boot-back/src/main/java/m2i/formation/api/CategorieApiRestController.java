@@ -40,7 +40,13 @@ public class CategorieApiRestController {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 	}
-
+	
+	@GetMapping("/nom/{nom}")
+	public List<Categorie> findCategoriesByNom(@PathVariable String nom) {
+		List<Categorie> optCategorie = categorieDao.findCategoriesByNom(nom);
+		return optCategorie;
+	}
+	
 	@PostMapping("")
 	public Categorie create(@RequestBody Categorie categorie) {
 		categorie = categorieDao.save(categorie);

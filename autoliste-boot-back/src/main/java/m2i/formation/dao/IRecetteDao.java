@@ -6,26 +6,30 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import m2i.formation.model.Produit;
 import m2i.formation.model.Recette;
 
 public interface IRecetteDao extends JpaRepository<Recette, Long> {
 	
-	@Query("select r from Recette r join r.ingredients i where i = :ingredient")
-	List<Recette> findRecettesByIngredient(@Param("ingredient") Produit ingredient); // OK.
+	@Query("select r from Recette r where r.nom = :nom")
+	List<Recette> findRecettesByNom(@Param("nom") String nom);	
+	
+	@Query("select r from Recette r left join fetch r.ingredients i where i.id = :id")
+	List<Recette> findRecettesByIngredient(@Param("id") Long id);
 	
 	@Query("select r from Recette r where r.nbConvives = :nbConvives")
-	List<Recette> findRecettesByNbConvives(@Param("nbConvives") Long nbConvives); // OK.
+	List<Recette> findRecettesByNbConvives(@Param("nbConvives") Long nbConvives);
 	
-	@Query("select r from Recette r where r.process = :process")
-	List<Recette> findMyRecettesByProcess(@Param("process") m2i.formation.model.Process process); // OK.
+	@Query("select r from Recette r where r.process.id = :id")
+	List<Recette> findRecettesByProcess(@Param("id") Long id);
 	
 	@Query("select r from Recette r where r.nbConvives >= :nbConvives")
-	List<Recette> findRecettesByNbConvivesGreaterThan(@Param("nbConvives") Long nbConvives); // OK.
+	List<Recette> findRecettesByNbConvivesGreaterThan(@Param("nbConvives") Long nbConvives);
 	
 	@Query("select r from Recette r where r.nbConvives <= :nbConvives")
-	List<Recette> findRecettesByNbConvivesSmallerThan(Long nbConvives); // OK.
-
-//	List<Utilisateur> findUtilisateursByRecette(Recette recette);
-//	List<Recette> findRecettesByUtilisateurs(Utilisateur utilisateur);
+	List<Recette> findRecettesByNbConvivesSmallerThan(Long nbConvives);
+	
+	@Query("select r from Recette r left join fetch r.themes i where i.id = :id")
+	List<Recette> findRecettesByTheme(Long id); // À tester...
+	
+	//List<Recette> findRecettesByUtilisateurs(Utilisateur utilisateur);
 }
