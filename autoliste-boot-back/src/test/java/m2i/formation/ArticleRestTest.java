@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import m2i.formation.dao.IArticleDao;
@@ -37,14 +36,12 @@ public class ArticleRestTest {
 	private IMagasinDao magasinDao;
 
 	@Test
-	@WithUserDetails("TestMock")
 	public void articleGet() throws Exception {
 		mockMvc.perform(get("/api/article")).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
 	}
 
 	@Test
-	@WithUserDetails("TestMock")
 	public void articleGetFindById() throws Exception {
 		Magasin magasin = new Magasin("auchan", null);
 		magasin = magasinDao.save(magasin);
@@ -60,7 +57,6 @@ public class ArticleRestTest {
 	}
 
 	@Test
-	@WithUserDetails("TestMock")
 	public void articlePost() throws Exception {
 		Magasin magasin = new Magasin("auchan", null);
 		magasin = magasinDao.save(magasin);
@@ -78,7 +74,6 @@ public class ArticleRestTest {
 	}
 
 	@Test
-	@WithUserDetails("TestMock")
 	public void articleGetFindByNom() throws Exception {
 		Magasin magasin = new Magasin("auchan", null);
 		magasin = magasinDao.save(magasin);
@@ -92,7 +87,6 @@ public class ArticleRestTest {
 	}
 
 	@Test
-	@WithUserDetails("TestMock")
 	public void articleGetFindByPrix() throws Exception {
 		Magasin magasin = new Magasin("auchan", null);
 		magasin = magasinDao.save(magasin);
@@ -105,7 +99,6 @@ public class ArticleRestTest {
 	}
 
 	@Test
-	@WithUserDetails("TestMock")
 	public void articleGetFindByPrixInf() throws Exception {
 		Magasin magasin = new Magasin("auchan", null);
 		magasin = magasinDao.save(magasin);
@@ -120,7 +113,6 @@ public class ArticleRestTest {
 	}
 
 	@Test
-	@WithUserDetails("TestMock")
 	public void articleGetFindByPrixSup() throws Exception {
 		Magasin magasin = new Magasin("auchan", null);
 		magasin = magasinDao.save(magasin);
@@ -135,7 +127,6 @@ public class ArticleRestTest {
 	}
 
 	@Test
-	@WithUserDetails("TestMock")
 	public void articleGetFindByMagasin() throws Exception {
 		Magasin magasin = new Magasin("auchan", null);
 		magasin = magasinDao.save(magasin);
@@ -149,7 +140,6 @@ public class ArticleRestTest {
 	}
 
 	@Test
-	@WithUserDetails("TestMock")
 	public void articlePut() throws Exception {
 		Magasin magasin = new Magasin("auchan", null);
 		magasin = magasinDao.save(magasin);
@@ -169,7 +159,6 @@ public class ArticleRestTest {
 	}
 
 	@Test
-	@WithUserDetails("TestMock")
 	public void articleDelete() throws Exception {
 		Magasin magasin = new Magasin("auchan", null);
 		magasin = magasinDao.save(magasin);

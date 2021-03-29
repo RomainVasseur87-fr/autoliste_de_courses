@@ -40,6 +40,17 @@ public class Recette {
 		
 	}
 	
+	public Recette(String nom, Long nbConvives, Process process, List<Produit> ingredients, List<Theme> themes) {
+		super();
+		this.nom = nom;
+		this.nbConvives = nbConvives;
+		this.process = process;
+		this.ingredients = ingredients;
+		this.themes = themes;
+	}
+
+
+
 	public Recette(Long id, String nom, Long nbConvives, Process process, List<Produit> ingredients,
 			List<Theme> themes) {
 		super();
