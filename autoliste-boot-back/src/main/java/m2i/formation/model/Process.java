@@ -18,7 +18,7 @@ public class Process {
 	private int version;
 	@Column(name = "nom", length = 255)
 	private String nom = null;
-	@Column(name = "description", length = 255)
+	@Column(name = "description", length = 5000)
 	private String description = null;
 	
 	public Process() {
