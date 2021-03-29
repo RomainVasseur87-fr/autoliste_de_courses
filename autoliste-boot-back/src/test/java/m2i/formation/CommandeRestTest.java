@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -41,14 +40,12 @@ public class CommandeRestTest {
 	private IArticleDao articleDao;
 
 	@Test
-	@WithUserDetails("TestMock")
 	public void commandeGet() throws Exception {
 		mockMvc.perform(get("/api/commande")).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
 	}
 
 	@Test
-	@WithUserDetails("TestMock")
 	public void commandeGetFindById() throws Exception {
 		Article article1 = new Article("pate lustucru", (long) 1000, 0.98, null);
 		article1 = articleDao.save(article1);
@@ -66,7 +63,6 @@ public class CommandeRestTest {
 	}
 
 	@Test
-	@WithUserDetails("TestMock")
 	public void commandePost() throws Exception {
 		Article article1 = new Article("pate lustucru", (long) 1000, 0.98, null);
 		article1 = articleDao.save(article1);
@@ -87,7 +83,6 @@ public class CommandeRestTest {
 	}
 
 	@Test
-	@WithUserDetails("TestMock")
 	public void commandeGetFindByNom() throws Exception {
 		int sizeStart = commandeDao.findByNom("commandeDuLundi").size();
 		Commande commande = new Commande("commandeDuLundi", null);
@@ -99,7 +94,6 @@ public class CommandeRestTest {
 	}
 
 	@Test
-	@WithUserDetails("TestMock")
 	public void articlePut() throws Exception {
 		Article article1 = new Article("pate lustucru", (long) 1000, 0.98, null);
 		article1 = articleDao.save(article1);
@@ -112,17 +106,15 @@ public class CommandeRestTest {
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonCommande = mapper.writeValueAsString(commande);
 
-		mockMvc.perform(put("/api/commande/" + commande.getId())
-				.contentType(MediaType.APPLICATION_JSON).content(jsonCommande))
-				.andExpect(status().isOk()).andDo(print())
-				.andExpect(jsonPath("$.id", is(notNullValue())))
+		mockMvc.perform(
+				put("/api/commande/" + commande.getId()).contentType(MediaType.APPLICATION_JSON).content(jsonCommande))
+				.andExpect(status().isOk()).andDo(print()).andExpect(jsonPath("$.id", is(notNullValue())))
 				.andExpect(jsonPath("$.nom").value("commandeDuLundi"))
 				.andExpect(jsonPath("$.articles[0].id").value(article1.getId()))
 				.andExpect(jsonPath("$.articles[1].id").value(article2.getId()));
 	}
 
 	@Test
-	@WithUserDetails("TestMock")
 	public void CommandeDelete() throws Exception {
 		Article article1 = new Article("pate lustucru", (long) 1000, 0.98, null);
 		article1 = articleDao.save(article1);

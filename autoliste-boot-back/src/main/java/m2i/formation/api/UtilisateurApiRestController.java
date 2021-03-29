@@ -7,8 +7,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.ReflectionUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -26,6 +26,7 @@ import m2i.formation.dao.IUtilisateurDao;
 import m2i.formation.model.IViews;
 import m2i.formation.model.Utilisateur;
 
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/api/utilisateur")
 public class UtilisateurApiRestController {
@@ -38,7 +39,6 @@ public class UtilisateurApiRestController {
 		List<Utilisateur> utilisateurs = utilisateurDao.findAll();
 		return utilisateurs;
 	}
-	
 
 	@GetMapping("/{id}")
 	@JsonView(IViews.IViewUtilisateur.class)
@@ -51,11 +51,46 @@ public class UtilisateurApiRestController {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 	}
-	
-	@GetMapping("/{id}/detail")
-	@JsonView(IViews.IViewUtilisateurDetail.class)
-	public Utilisateur detail(@PathVariable String id) {
-		Optional<Utilisateur> optUtilisateur = utilisateurDao.findById(id);
+
+	@GetMapping("/nom/{nom}")
+	@JsonView(IViews.IViewUtilisateur.class)
+	public List<Utilisateur> findByNom(@PathVariable String nom) {
+		List<Utilisateur> utilisateurs = utilisateurDao.findByNom(nom);
+
+		if (!utilisateurs.isEmpty()) {
+			return utilisateurs;
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@GetMapping("/prenom/{prenom}")
+	@JsonView(IViews.IViewUtilisateur.class)
+	public List<Utilisateur> findByPrenom(@PathVariable String prenom) {
+		List<Utilisateur> utilisateurs = utilisateurDao.findByPrenom(prenom);
+
+		if (!utilisateurs.isEmpty()) {
+			return utilisateurs;
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@GetMapping("/recette/{id}")
+	@JsonView(IViews.IViewUtilisateur.class)
+	public List<Utilisateur> findByRecette(@PathVariable long id) {
+		List<Utilisateur> utilisateurs = utilisateurDao.findByRecette(id);
+
+		if (!utilisateurs.isEmpty()) {
+			return utilisateurs;
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@GetMapping("/adresse/{id}")
+	public Utilisateur findUtilisateurByAdresse(@PathVariable Long id) {
+		Optional<Utilisateur> optUtilisateur = utilisateurDao.findUtilisateurByAdresse(id);
 
 		if (optUtilisateur.isPresent()) {
 			return optUtilisateur.get();
@@ -63,10 +98,8 @@ public class UtilisateurApiRestController {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@PostMapping("")
-	@JsonView(IViews.IViewUtilisateur.class)
-	@PreAuthorize("hasRole('ADMIN')")
 	public Utilisateur create(@RequestBody Utilisateur utilisateur) {
 		utilisateur = utilisateurDao.save(utilisateur);
 
@@ -74,19 +107,16 @@ public class UtilisateurApiRestController {
 	}
 
 	@PostMapping("/liste")
-	@JsonView(IViews.IViewUtilisateur.class)
-	@PreAuthorize("hasRole('ADMIN')")
 	public List<Utilisateur> create(@RequestBody List<Utilisateur> utilisateurs) {
 		utilisateurs = utilisateurDao.saveAll(utilisateurs);
 
 		return utilisateurs;
 	}
 
-	@PutMapping("/{username}")
+	@PutMapping("/{id}")
 	@JsonView(IViews.IViewUtilisateur.class)
-	@PreAuthorize("hasRole('ADMIN')")
-	public Utilisateur update(@RequestBody Utilisateur utilisateur, @PathVariable String username) {
-		if (!utilisateurDao.existsByUsername(username) || !username.equals(utilisateur.getUsername())) {
+	public Utilisateur update(@RequestBody Utilisateur utilisateur, @PathVariable String id) {
+		if (!utilisateurDao.existsById(id) || !id.equals(utilisateur.getId().toString())) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");
 		}
 
@@ -94,7 +124,7 @@ public class UtilisateurApiRestController {
 
 		return utilisateur;
 	}
-	
+
 	@PatchMapping("/{id}")
 	@JsonView(IViews.IViewUtilisateur.class)
 	public Utilisateur partialUpdate(@RequestBody Map<String, Object> updates, @PathVariable String id) {
@@ -116,7 +146,6 @@ public class UtilisateurApiRestController {
 	}
 
 	@DeleteMapping("/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
 	public void delete(@PathVariable String id) {
 		if (!utilisateurDao.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource");

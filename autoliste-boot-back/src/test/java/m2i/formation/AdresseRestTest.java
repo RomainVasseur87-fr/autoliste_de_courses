@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,14 +33,12 @@ public class AdresseRestTest {
 	private IAdresseDao adresseDao;
 
 	@Test
-	@WithUserDetails("TestMock")
 	public void adresseGet() throws Exception {
 		mockMvc.perform(get("/api/adresse")).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
 	}
 
 	@Test
-	@WithUserDetails("TestMock")
 	public void articleGetFindById() throws Exception {
 		Adresse adresse = new Adresse(1, "rue de la Paix", "1er étage", "Paris", "75008", "France");
 		adresse = adresseDao.save(adresse);
@@ -55,7 +52,6 @@ public class AdresseRestTest {
 	}
 
 	@Test
-	@WithUserDetails("TestMock")
 	public void adressePost() throws Exception {
 		Adresse adresse = new Adresse(1, "rue de la Paix", "1er étage", "Paris", "75008", "France");
 
@@ -72,7 +68,6 @@ public class AdresseRestTest {
 	}
 
 	@Test
-	@WithUserDetails("TestMock")
 	public void adresseGetFindByVille() throws Exception {
 		int sizeStart = adresseDao.findByVille("Ajaccio").size();
 
@@ -91,7 +86,6 @@ public class AdresseRestTest {
 	}
 
 	@Test
-	@WithUserDetails("TestMock")
 	public void adresseGetFindByCodePostal() throws Exception {
 		int sizeStart = adresseDao.findByCodePostal("2A520").size();
 
@@ -110,7 +104,6 @@ public class AdresseRestTest {
 	}
 
 	@Test
-	@WithUserDetails("TestMock")
 	public void adressePut() throws Exception {
 		Adresse adresse = new Adresse(1, "rue de la Paix", "1er étage", "Paris", "75008", "France");
 		adresse = adresseDao.save(adresse);
@@ -129,7 +122,6 @@ public class AdresseRestTest {
 	}
 
 	@Test
-	@WithUserDetails("TestMock")
 	public void adresseDelete() throws Exception {
 		Adresse adresse = new Adresse(1, "rue de la Paix", "1er étage", "Paris", "75008", "France");
 		adresse = adresseDao.save(adresse);

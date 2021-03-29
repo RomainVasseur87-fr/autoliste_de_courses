@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -46,15 +45,14 @@ class RecetteRestControllerTest {
 
 	@Autowired
 	IThemeDao themeDao;
-	
+
 	@Autowired
 	IProcessDao processDao;
-	
+
 	@Autowired
 	IProduitDao produitDao;
 
 	@Test
-	@WithUserDetails("mohamed")
 	public void recetteGetAll() throws Exception {
 		List<Recette> recettes = recetteDao.findAll();
 		int sizeStart = recettes.size();
@@ -71,7 +69,6 @@ class RecetteRestControllerTest {
 	// ===========================================================================
 
 	@Test
-	@WithUserDetails("mohamed")
 	public void recetteGetById() throws Exception {
 		List<Recette> recettes = recetteDao.findAll();
 		Long id = recettes.get(0).getId();
@@ -85,7 +82,6 @@ class RecetteRestControllerTest {
 	// ===========================================================================
 
 	@Test
-	@WithUserDetails("mohamed")
 	public void recetteGetByNom() throws Exception {
 		Recette recette = new Recette();
 		recette.setNom("Chips");
@@ -98,7 +94,6 @@ class RecetteRestControllerTest {
 	}
 
 	@Test
-	@WithUserDetails("mohamed")
 	public void recetteGetByTheme() throws Exception {
 		Theme theme1 = new Theme("AAAAA1");
 		theme1 = themeDao.save(theme1);
@@ -110,23 +105,22 @@ class RecetteRestControllerTest {
 		theme4 = themeDao.save(theme4);
 		Theme theme5 = new Theme("EEEEE5");
 		theme5 = themeDao.save(theme5);
-		
+
 		Recette recette;
 		recette = new Recette();
 		recette.setNom("Recette 1234567890");
 		recette.setThemes(List.of(theme1, theme2, theme3, theme4, theme5));
-		
+
 		recette = recetteDao.save(recette);
-			
+
 		int nombre = recetteDao.findRecettesByTheme(theme1.getId()).size();
-		
+
 		mockMvc.perform(get("/api/recette/theme/{id}", theme1.getId()).contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk()).andDo(print()).andExpect(jsonPath("$[0].id", is(notNullValue())))
 				.andExpect(jsonPath("$.length()").value(nombre));
 	}
 
 	@Test
-	@WithUserDetails("mohamed")
 	public void recetteDelete() throws Exception {
 		Recette recette = new Recette();
 		recette.setNom("Chips");
@@ -136,7 +130,6 @@ class RecetteRestControllerTest {
 	}
 
 	@Test
-	@WithUserDetails("mohamed")
 	public void recettePost() throws Exception {
 		Recette recette = new Recette();
 		recette.setNom("Recette 1");
@@ -150,7 +143,6 @@ class RecetteRestControllerTest {
 	}
 
 	@Test
-	@WithUserDetails("mohamed")
 	public void recettePut() throws Exception {
 
 		Recette recette = new Recette();
@@ -168,7 +160,6 @@ class RecetteRestControllerTest {
 	}
 
 	@Test
-	@WithUserDetails("mohamed")
 	public void recetteGetByNbConvives() throws Exception {
 		int sizeStart = recetteDao.findRecettesByNbConvives(1000L).size();
 		Recette recette = new Recette();
@@ -183,7 +174,6 @@ class RecetteRestControllerTest {
 	}
 
 	@Test
-	@WithUserDetails("mohamed")
 	public void recetteGetByNbConvivesGreaterThan() throws Exception {
 		int sizeStart = recetteDao.findRecettesByNbConvivesGreaterThan(1000L).size();
 		Recette recette = new Recette();
@@ -197,7 +187,6 @@ class RecetteRestControllerTest {
 	}
 
 	@Test
-	@WithUserDetails("mohamed")
 	public void recetteGetByNbConvivesSmallerThan() throws Exception {
 		int sizeStart = recetteDao.findRecettesByNbConvivesSmallerThan(1000L).size();
 		Recette recette = new Recette();
@@ -209,9 +198,8 @@ class RecetteRestControllerTest {
 				.content(jsonRecette)).andExpect(status().isOk()).andExpect(jsonPath("$[0].id", is(notNullValue())))
 				.andExpect(jsonPath("$.length()").value(sizeStart + 1));
 	}
-	
+
 	@Test
-	@WithUserDetails("mohamed")
 	public void recetteGetByProcess() throws Exception {
 		m2i.formation.model.Process process = new m2i.formation.model.Process();
 		process = processDao.save(process);
@@ -220,32 +208,33 @@ class RecetteRestControllerTest {
 		recette.setProcess(process);
 		recette = recetteDao.save(recette);
 		int sizeStart = recetteDao.findRecettesByProcess(id).size();
-		
+
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonRecette = mapper.writeValueAsString(recette);
-		mockMvc.perform(get("/api/recette/process/{id}", id).contentType(MediaType.APPLICATION_JSON)
-				.content(jsonRecette)).andExpect(status().isOk()).andExpect(jsonPath("$[0].id", is(notNullValue())))
+		mockMvc.perform(
+				get("/api/recette/process/{id}", id).contentType(MediaType.APPLICATION_JSON).content(jsonRecette))
+				.andExpect(status().isOk()).andExpect(jsonPath("$[0].id", is(notNullValue())))
 				.andExpect(jsonPath("$.length()").value(sizeStart));
 	}
-	
+
 	@Test
-	@WithUserDetails("mohamed")
 	public void recetteGetByIngredients() throws Exception {
 		Produit ingredient = new Produit();
 		ingredient = produitDao.save(ingredient);
 		Long id = ingredient.getId();
-		
+
 		Recette recette = new Recette();
 		recette.setIngerients(List.of(ingredient));
 		recette = recetteDao.save(recette);
-		
+
 		int sizeStart = recetteDao.findRecettesByIngredient(id).size();
-		
+
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonRecette = mapper.writeValueAsString(recette);
-		mockMvc.perform(get("/api/recette/ingredient/{id}", id).contentType(MediaType.APPLICATION_JSON)
-				.content(jsonRecette)).andExpect(status().isOk()).andExpect(jsonPath("$[0].id", is(notNullValue())))
+		mockMvc.perform(
+				get("/api/recette/ingredient/{id}", id).contentType(MediaType.APPLICATION_JSON).content(jsonRecette))
+				.andExpect(status().isOk()).andExpect(jsonPath("$[0].id", is(notNullValue())))
 				.andExpect(jsonPath("$.length()").value(sizeStart));
 	}
-	
+
 }
