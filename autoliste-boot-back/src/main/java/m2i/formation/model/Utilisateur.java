@@ -4,6 +4,7 @@ package m2i.formation.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
+
+
 
 @Entity
 @Table(name = "utilisateur")
@@ -37,7 +40,7 @@ public class Utilisateur {
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "adresse_id")
 	private Adresse adresse;
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.REMOVE)
 	@JoinTable(name = "utilisateur_recettes", joinColumns = @JoinColumn(name = "utilisateur_id"), inverseJoinColumns = @JoinColumn(name = "recette_id"))
 	private List<Recette> recettes = new ArrayList<Recette>();
 
