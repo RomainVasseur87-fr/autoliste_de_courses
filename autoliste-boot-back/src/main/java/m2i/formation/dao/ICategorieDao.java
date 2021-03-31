@@ -17,6 +17,6 @@ public interface ICategorieDao extends JpaRepository<Categorie, Long> {
 	Optional<Categorie> findCategorieById(Long id);
 		
 	@Query("select c from Categorie c where c.nom = :nom")
-	List<Categorie> findCategoriesByNom(String nom);
+	Optional<Categorie> findCategorieByNom(String nom);
 
 }
