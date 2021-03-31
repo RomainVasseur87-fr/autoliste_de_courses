@@ -81,8 +81,8 @@ class ThemeRestControllerTest {
 		theme = themeDao.save(theme);
 
 		mockMvc.perform(get("/api/theme/nom/{nom}", nom).contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk()).andDo(print()).andExpect(jsonPath("$[0].id", is(notNullValue())))
-				.andExpect(jsonPath("$[0].nom").value(nom));
+				.andExpect(status().isOk()).andDo(print()).andExpect(jsonPath("$.id", is(notNullValue())))
+				.andExpect(jsonPath("$.nom").value(nom));
 	}
 
 	@Test
@@ -111,14 +111,13 @@ class ThemeRestControllerTest {
 	}
 
 	@Test
-	public void themeFindByfindRecettesByNom() throws Exception {
-		int sizeStart = themeDao.findThemesByNom("Bidule").size();
-		Theme theme = new Theme("Bidule");
-		themeDao.save(theme);
-
+	public void themeFindThemeByNom() throws Exception {
+		Theme theme1 = new Theme("Bidule");
+		theme1 = themeDao.save(theme1);
+		Theme theme2 = themeDao.findThemeByNom("Bidule").get();
 		mockMvc.perform(get("/api/theme/nom/Bidule")).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.length()").value(sizeStart + 1));
+				.andExpect(jsonPath("$.nom").value(theme2.getNom()));
 	}
 
 	@Test

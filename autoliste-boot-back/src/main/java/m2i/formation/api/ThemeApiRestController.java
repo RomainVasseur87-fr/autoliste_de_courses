@@ -26,7 +26,7 @@ public class ThemeApiRestController {
 
 	@Autowired
 	private IThemeDao themeDao;
-	
+
 	@GetMapping("")
 	public List<Theme> list() {
 		List<Theme> themes = themeDao.findAll();
@@ -35,24 +35,37 @@ public class ThemeApiRestController {
 
 	@GetMapping("/{id}")
 	public Theme find(@PathVariable Long id) {
-		Optional<Theme> optTheme = themeDao.findById(id);
+		Optional<Theme> optTheme = themeDao.findThemeById(id);
 		if (optTheme.isPresent()) {
 			return optTheme.get();
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 	}
+
+	// Modifications : Le 31/03/2021.
 	
 	@GetMapping("/nom/{nom}")
-	public List<Theme> findThemesByNom(@PathVariable String nom) {
-		List<Theme> optTheme = themeDao.findThemesByNom(nom);
-		return optTheme;
+	public Theme findThemeByNom(@PathVariable String nom) {
+		Optional<Theme> optTheme = themeDao.findThemeByNom(nom);
+		if (optTheme.isPresent()) {
+			return optTheme.get();
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
 	}
+
+	// Modifications : Le 31/03/2021.
 	
 	@PostMapping("")
 	public Theme create(@RequestBody Theme theme) {
-		theme = themeDao.save(theme);
-		return theme;
+		Optional<Theme> optTheme = themeDao.findThemeByNom(theme.getNom());
+		if (optTheme.isPresent()) {
+			return optTheme.get();
+		} else {
+			theme = themeDao.save(theme);
+			return theme;
+		}
 	}
 
 	@PutMapping("/{id}")

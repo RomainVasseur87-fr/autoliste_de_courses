@@ -6,10 +6,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import m2i.formation.dao.IAdresseDao;
+import m2i.formation.dao.IMagasinDao;
 import m2i.formation.dao.IProcessDao;
 import m2i.formation.dao.IProduitDao;
 import m2i.formation.dao.IRecetteDao;
 import m2i.formation.dao.IThemeDao;
+import m2i.formation.model.Adresse;
+import m2i.formation.model.Magasin;
 import m2i.formation.model.Process;
 import m2i.formation.model.Produit;
 import m2i.formation.model.Recette;
@@ -29,7 +33,13 @@ public class QuelquesRecettes {
 
 	@Autowired
 	IThemeDao themeDao;
-
+	
+	@Autowired
+	IMagasinDao magasinDao;
+	
+	@Autowired
+	IAdresseDao adresseDao;
+	
 	@Test
 	public void recette1Creation() {
 		Produit produit1 = new Produit("Farine", 50L);
@@ -187,4 +197,67 @@ public class QuelquesRecettes {
 		recette1.setThemes(List.of(theme));
 		recette1 = recetteDao.save(recette1);
 	}
+	
+	@Test
+	public void magasin1Creation() {
+		Adresse adresse = new Adresse();
+		adresse.setCodePostal("62223");
+		adresse.setRue("Rue Mediolanaise");
+		adresse.setVille("Saint-Nicolas");
+		adresse.setPays("France");
+		adresse = adresseDao.save(adresse);
+		Magasin magasin = new Magasin("E.Leclerc", adresse);
+		magasin = magasinDao.save(magasin);
+	}
+	
+	@Test
+	public void magasin2Creation() {
+		Adresse adresse = new Adresse();
+		adresse.setCodePostal("62000");
+		adresse.setComplement("BP 50112");
+		adresse.setNumero(225);
+		adresse.setRue("Avenue Winston Churchill");
+		adresse.setVille("Arras");		
+		adresse.setPays("France");
+		adresse = adresseDao.save(adresse);
+		Magasin magasin = new Magasin("Auchan", adresse);
+		magasin = magasinDao.save(magasin);
+	}
+
+	@Test
+	public void magasin3Creation() {
+		Adresse adresse = new Adresse();
+		adresse.setCodePostal("62800");
+		adresse.setRue("Rue Marie Liétard");
+		adresse.setVille("Liévin");		
+		adresse.setPays("France");
+		adresse = adresseDao.save(adresse);
+		Magasin magasin = new Magasin("Carrefour", adresse);
+		magasin = magasinDao.save(magasin);
+	}
+	
+	@Test
+	public void magasin4Creation() {
+		Adresse adresse = new Adresse();
+		adresse.setCodePostal("62223");
+		adresse.setRue("Route de Béthune");
+		adresse.setVille("Sainte-Catherine");		
+		adresse.setPays("France");
+		adresse = adresseDao.save(adresse);
+		Magasin magasin = new Magasin("Intermarché SUPER", adresse);
+		magasin = magasinDao.save(magasin);
+	}
+	
+	@Test
+	public void magasin5Creation() {
+		Adresse adresse = new Adresse();
+		adresse.setCodePostal("62118");
+		adresse.setRue("Rue Maréchal Foch");
+		adresse.setVille("Biache-Saint-Vaast");		
+		adresse.setPays("France");
+		adresse = adresseDao.save(adresse);
+		Magasin magasin = new Magasin("Super U", adresse);
+		magasin = magasinDao.save(magasin);
+	}
+	
 }

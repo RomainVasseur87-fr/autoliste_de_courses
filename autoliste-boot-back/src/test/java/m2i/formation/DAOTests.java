@@ -144,16 +144,10 @@ class DAOTests {
 	public void categorieFindcategorieByNom() {
 		double nombre = Math.random();
 		String nom = "Catégorie " + nombre;
-		List<Categorie> categorie1 = categorieDao.findCategoriesByNom(nom);
-		
-		Categorie categorie = new Categorie(nom);
-		categorie = categorieDao.save(categorie);
-		int nombre1 = categorie1.size();
-		
-		List<Categorie> categorie2 = categorieDao.findCategoriesByNom(nom);
-		int nombre2 = categorie2.size();
-		
-		assertEquals(nombre2 - nombre1, 1);
+		Categorie categorie1 = new Categorie(nom);
+		categorie1 = categorieDao.save(categorie1);
+		Categorie categorie2 = categorieDao.findCategorieByNom(nom).get();
+		assertEquals(categorie2.getNom(), nom);
 	}
 	
 //**************************************** Tests du thème. ****************************************
@@ -198,14 +192,13 @@ class DAOTests {
 	}
 	
 	@Test
-	public void themeFindThemesByNom() {
+	public void themeFindThemeByNom() {
 		double nombre = Math.random();
 		String nom = "Thème " + nombre;
-		List<Theme> themes1 = themeDao.findThemesByNom(nom);
-		Theme theme = new Theme(nom);
-		theme = themeDao.save(theme);
-		List<Theme> themes2 = themeDao.findThemesByNom(nom);
-		assertEquals(themes2.size(), themes1.size() + 1);
+		Theme theme1 = new Theme(nom);
+		theme1 = themeDao.save(theme1);
+		Theme theme2 = themeDao.findThemeByNom(nom).get();
+		assertEquals(theme1.getNom(), theme2.getNom());
 	}
 	
 //**************************************** Tests de la recette. ****************************************
