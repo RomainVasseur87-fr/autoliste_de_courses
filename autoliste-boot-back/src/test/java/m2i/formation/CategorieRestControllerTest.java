@@ -62,12 +62,12 @@ class CategorieRestControllerTest {
 
 	@Test
 	public void getCategorieById() throws Exception {
-		Categorie categorie = new Categorie("boisson");
+		Categorie categorie = new Categorie("Boisson");
 		categorie = categorieDao.save(categorie);
 
 		mockMvc.perform(get("/api/categorie/" + categorie.getId()).contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk()).andDo(print()).andExpect(jsonPath("$.id", is(notNullValue())))
-				.andExpect(jsonPath("$.nom").value("boisson"));
+				.andExpect(jsonPath("$.nom").value("Boisson"));
 	}
 
 	@Test

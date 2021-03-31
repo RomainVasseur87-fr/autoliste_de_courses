@@ -148,7 +148,7 @@ public class QuelquesRecettes {
 				"Mettre dans un shaker, avec de la glace, le sirop de menthe, le sirop de sucre et les jus de citron. Bien agiter. Verser dans un verre, décorer d'une branche de menthe et d'une tranche de citron.");
 		process = processDao.save(process);
 
-		Theme theme = new Theme("Boisson");
+		Theme theme = new Theme("Végétarien");
 		theme = themeDao.save(theme);
 
 		Recette recette1 = new Recette();
@@ -185,7 +185,7 @@ public class QuelquesRecettes {
 		Process process = new Process("Gâteau au yaourt à la noix de coco râpée - Préparation", "Mélanger tous les ingrédients, dans l'ordre, dans un saladier. Verser la préparation dans un moule à gâteau préalable beurré ou huilé. Mettre au four à 170°C (thermostat 5-6) pendant 25 minutes environ. Pour savoir s'il est cuit, planter un une lame de couteau dans le gâteau.");
 		process = processDao.save(process);
 
-		Theme theme = new Theme("Dessert");
+		Theme theme = new Theme("Gâteau");
 		theme = themeDao.save(theme);
 
 		Recette recette1 = new Recette();
