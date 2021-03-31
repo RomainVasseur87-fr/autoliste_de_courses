@@ -2,6 +2,7 @@ package m2i.formation.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class Recette {
 	private String nom;
 	@Column(name = "nbConvives", length = 255)
 	private Long nbConvives;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.REMOVE)
 	@JoinColumn(name = "process_id")
 	private Process process;
 	@ManyToMany
