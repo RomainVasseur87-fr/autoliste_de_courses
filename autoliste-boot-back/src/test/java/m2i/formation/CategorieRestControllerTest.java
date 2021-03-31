@@ -77,8 +77,8 @@ class CategorieRestControllerTest {
 		categorie = categorieDao.save(categorie);
 
 		mockMvc.perform(get("/api/categorie/nom/Boisson").contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk()).andDo(print()).andExpect(jsonPath("$[0].id", is(notNullValue())))
-				.andExpect(jsonPath("$[0].nom").value("Boisson"));
+				.andExpect(status().isOk()).andDo(print()).andExpect(jsonPath("$.id", is(notNullValue())))
+				.andExpect(jsonPath("$.nom").value("Boisson"));
 	}
 
 	@Test

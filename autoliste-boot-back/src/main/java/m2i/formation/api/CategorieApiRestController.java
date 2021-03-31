@@ -43,16 +43,29 @@ public class CategorieApiRestController {
 		}
 	}
 	
+	// Modifications : Le 31/03/2021.
+	
 	@GetMapping("/nom/{nom}")
-	public List<Categorie> findCategoriesByNom(@PathVariable String nom) {
-		List<Categorie> optCategorie = categorieDao.findCategoriesByNom(nom);
-		return optCategorie;
+	public Categorie findCategorieByNom(@PathVariable String nom) {
+		Optional<Categorie> optCategorie = categorieDao.findCategorieByNom(nom);
+		if (optCategorie.isPresent()) {
+			return optCategorie.get();
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
 	}
+	
+	// Modifications : Le 31/03/2021.
 	
 	@PostMapping("")
 	public Categorie create(@RequestBody Categorie categorie) {
-		categorie = categorieDao.save(categorie);
-		return categorie;
+		Optional<Categorie> optCategorie = categorieDao.findCategorieByNom(categorie.getNom());
+		if (optCategorie.isPresent()) {
+			return optCategorie.get();
+		} else {
+			categorie = categorieDao.save(categorie);
+			return categorie;
+		}
 	}
 
 	@PutMapping("/{id}")

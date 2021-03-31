@@ -15,9 +15,9 @@ public interface IThemeDao extends JpaRepository<Theme, Long> {
 	List<Theme> findAllThemes();
 	
 	@Query("select t from Theme t where t.id = :id")
-	Optional<Theme> findThemesById(@Param("id") Long id);
+	Optional<Theme> findThemeById(@Param("id") Long id);
 	
 	@Query("select t from Theme t where t.nom = :nom")
-	List<Theme> findThemesByNom(String nom);
+	Optional<Theme> findThemeByNom(String nom);
 	
 }
