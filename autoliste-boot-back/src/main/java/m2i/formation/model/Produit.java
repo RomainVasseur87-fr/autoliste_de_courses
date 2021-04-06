@@ -3,6 +3,7 @@ package m2i.formation.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class Produit {
 	private String nom;
 	@Column(name = "quantite")
 	private long quantite;
-	@ManyToMany
+	@ManyToMany (cascade = {CascadeType.MERGE,CascadeType.PERSIST})
 	@JoinTable(name = "produit_categories", joinColumns = @JoinColumn(name = "produit_id"), inverseJoinColumns = @JoinColumn(name = "categorie_id"))
 	private List<Categorie> categories = new ArrayList<Categorie>();
 

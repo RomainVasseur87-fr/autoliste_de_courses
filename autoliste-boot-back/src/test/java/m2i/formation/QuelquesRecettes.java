@@ -41,6 +41,171 @@ public class QuelquesRecettes {
 	IAdresseDao adresseDao;
 	
 	@Test
+	public void themesCreation() {
+		Theme theme;
+		theme = new Theme("Appéritif");
+		theme = themeDao.save(theme);
+		theme = new Theme("Bretagne – cuisine bretonne");
+		theme = themeDao.save(theme);
+		theme = new Theme("Brochettes (Spécial Barbecue)");
+		theme = themeDao.save(theme);
+		theme = new Theme("Cakes à croquer !");
+		theme = themeDao.save(theme);
+		theme = new Theme("Chandeleur");
+		theme = themeDao.save(theme);
+		theme = new Theme("Cuisine brésilienne");
+		theme = themeDao.save(theme);
+		theme = new Theme("Cuisine hollandaise");
+		theme = themeDao.save(theme);
+		theme = new Theme("Cuisine marocaine");
+		theme = themeDao.save(theme);
+		theme = new Theme("Digestif");
+		theme = themeDao.save(theme);
+		theme = new Theme("Dossier Shrek");
+		theme = themeDao.save(theme);
+		theme = new Theme("Epiphanie");
+		theme = themeDao.save(theme);
+		theme = new Theme("Fête des mères");
+		theme = themeDao.save(theme);
+		theme = new Theme("Halloween");
+		theme = themeDao.save(theme);
+		theme = new Theme("Inde – la cuisine indienne");
+		theme = themeDao.save(theme);
+		theme = new Theme("Italie – la cuisine Italienne");
+		theme = themeDao.save(theme);
+		theme = new Theme("Macarons");
+		theme = themeDao.save(theme);
+		theme = new Theme("Mardi-gras");
+		theme = themeDao.save(theme);
+		theme = new Theme("Mexico !");
+		theme = themeDao.save(theme);
+		theme = new Theme("Noël");
+		theme = themeDao.save(theme);
+		theme = new Theme("Normandie – cuisine normande");
+		theme = themeDao.save(theme);
+		theme = new Theme("Nouvel an chinois : recettes asiatiques");
+		theme = themeDao.save(theme);
+		theme = new Theme("Noël");
+		theme = themeDao.save(theme);
+		theme = new Theme("Papillotes de poisson");
+		theme = themeDao.save(theme);
+		theme = new Theme("Pâques");
+		theme = themeDao.save(theme);
+		theme = new Theme("Pique-nique !");
+		theme = themeDao.save(theme);
+		theme = new Theme("plat");
+		theme = themeDao.save(theme);
+		theme = new Theme("Plat chaud");
+		theme = themeDao.save(theme);
+		theme = new Theme("Plat froid");
+		theme = themeDao.save(theme);
+		theme = new Theme("Poisson");
+		theme = themeDao.save(theme);
+		theme = new Theme("Poulet rôti");
+		theme = themeDao.save(theme);
+		theme = new Theme("Provence – recettes provençales");
+		theme = themeDao.save(theme);
+		theme = new Theme("Quiches et tartes");
+		theme = themeDao.save(theme);
+		theme = new Theme("Ramadan");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette à emporter");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette au chocolat");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette au fromage");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette aux épices et aromates");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette aux fruits");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette d'agneau");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette d'apéritifs");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette de cakes");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette de chocolats de Pâques");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette de crêpes");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette de cuisine du monde");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette de cuisine régionale");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette de féculents");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette de fêtes");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette de légumes");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette de légumes de printemps");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette de pâtes");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette de pâtisseries");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette de petit-déjeuner");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette de pizzas");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette de plats");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette de poissons");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette de quiches");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette de saison");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette de salades");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette de sauces");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette de soupes");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette de tartes");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette de viandes");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette d'oeufs");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette faciles");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette par cuisson");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette pas chères");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette pour enfants");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette pour frigo vide");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette pour recevoir");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette rapides");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette Thermomix");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recette Weight Watchers");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recettes de menu de Pâques");
+		theme = themeDao.save(theme);
+		theme = new Theme("Recettes pour deux");
+		theme = themeDao.save(theme);
+		theme = new Theme("Régimes spécifiques et pour les intolérants");
+		theme = themeDao.save(theme);
+		theme = new Theme("Rhône-Alpes et région lyonnaise");
+		theme = themeDao.save(theme);
+		theme = new Theme("Saint-Nicolas");
+		theme = themeDao.save(theme);
+		theme = new Theme("Saint-Patrick");
+		theme = themeDao.save(theme);
+		theme = new Theme("Saint-Valentin");
+		theme = themeDao.save(theme);
+		theme = new Theme("Smoothies en folie");
+		theme = themeDao.save(theme);
+	}
+	
+	@Test
 	public void recette1Creation() {
 		Produit produit1 = new Produit("Farine", 50L);
 		Produit produit2 = new Produit("Oeufs", 3L);
@@ -58,7 +223,7 @@ public class QuelquesRecettes {
 				"Fouettez 3 oeufs avec 10 cl de crème liquide et 50 g de farine. Ajoutez 250 g de carottes râpées et 100 g de gruyère râpé. Salez et poivrez, mélangez. Laissez reposer 15 min. Faites chauffer 20 g de beurre et 1 cuillère à soupe d'huile dans une poêle. Formez des galettes. Faites dorer à feu doux 5 min de chaque côté. Egouttez sur du papier absorbant et servez.");
 		process = processDao.save(process);
 
-		Theme theme = new Theme("Entrée");
+		Theme theme = new Theme("Recette d'entrées");
 		theme = themeDao.save(theme);
 
 		Recette recette1 = new Recette();
@@ -84,7 +249,7 @@ public class QuelquesRecettes {
 				"Couper les bananes en morceaux et les ajouter aux yaourts dans un blender ainsi que le lait. Mixer le tout et boire à la paille ou au verre ! Ajouter selon les goûts du miel ou du sucre roux !");
 		process = processDao.save(process);
 
-		Theme theme = new Theme("Dessert");
+		Theme theme = new Theme("Recette de desserts");
 		theme = themeDao.save(theme);
 
 		Recette recette1 = new Recette();
@@ -116,7 +281,7 @@ public class QuelquesRecettes {
 				"Mélangez tous les ingrédients et servez bien frais, avec des glaçons.");
 		process = processDao.save(process);
 
-		Theme theme = new Theme("Boisson");
+		Theme theme = new Theme("Recette de boissons");
 		theme = themeDao.save(theme);
 
 		Recette recette1 = new Recette();
@@ -148,7 +313,7 @@ public class QuelquesRecettes {
 				"Mettre dans un shaker, avec de la glace, le sirop de menthe, le sirop de sucre et les jus de citron. Bien agiter. Verser dans un verre, décorer d'une branche de menthe et d'une tranche de citron.");
 		process = processDao.save(process);
 
-		Theme theme = new Theme("Végétarien");
+		Theme theme = new Theme("Recette de végétariens");
 		theme = themeDao.save(theme);
 
 		Recette recette1 = new Recette();
@@ -185,7 +350,7 @@ public class QuelquesRecettes {
 		Process process = new Process("Gâteau au yaourt à la noix de coco râpée - Préparation", "Mélanger tous les ingrédients, dans l'ordre, dans un saladier. Verser la préparation dans un moule à gâteau préalable beurré ou huilé. Mettre au four à 170°C (thermostat 5-6) pendant 25 minutes environ. Pour savoir s'il est cuit, planter un une lame de couteau dans le gâteau.");
 		process = processDao.save(process);
 
-		Theme theme = new Theme("Gâteau");
+		Theme theme = new Theme("Recette de gâteaux");
 		theme = themeDao.save(theme);
 
 		Recette recette1 = new Recette();

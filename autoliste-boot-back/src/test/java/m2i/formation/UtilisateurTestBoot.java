@@ -57,7 +57,7 @@ public class UtilisateurTestBoot {
 	
 	@Test
 	public void utilisateurfindByRecette() {
-		Recette recette = new Recette("gloubiboulga", 12L, null, null, null);
+		Recette recette = new Recette("gloubiboulga", 12L, null, null, null, null);
 		recette = recetteDao.save(recette);
 		int sizeStart = utilisateurDao.findByRecette(recette.getId()).size();
 		Utilisateur utilisateur = new Utilisateur("bidouille", "jean", "jean.bidouille@mail.com");

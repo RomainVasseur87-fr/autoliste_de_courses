@@ -27,33 +27,36 @@ public class Recette {
 	private String nom;
 	@Column(name = "nbConvives", length = 255)
 	private Long nbConvives;
-	@OneToOne(cascade=CascadeType.REMOVE)
+	@OneToOne(cascade= {CascadeType.REMOVE,CascadeType.MERGE, CascadeType.PERSIST})
 	@JoinColumn(name = "process_id")
 	private Process process;
-	@ManyToMany
+	@ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}) 
 	@JoinTable(name = "ingredients", joinColumns = @JoinColumn(name = "recette_id"), inverseJoinColumns = @JoinColumn(name = "produit_id"))
 	private List<Produit> ingredients;
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "themes", joinColumns = @JoinColumn(name = "recette_id"), inverseJoinColumns = @JoinColumn(name = "theme_id"))
 	private List<Theme> themes;
+	@Column(name = "rating")
+	private Integer rating;
 	
 	public Recette() {
 		
 	}
 	
-	public Recette(String nom, Long nbConvives, Process process, List<Produit> ingredients, List<Theme> themes) {
+	public Recette(String nom, Long nbConvives, Process process, List<Produit> ingredients, List<Theme> themes, Integer rating) {
 		super();
 		this.nom = nom;
 		this.nbConvives = nbConvives;
 		this.process = process;
 		this.ingredients = ingredients;
 		this.themes = themes;
+		this.rating = rating;
 	}
 
 
 
 	public Recette(Long id, String nom, Long nbConvives, Process process, List<Produit> ingredients,
-			List<Theme> themes) {
+			List<Theme> themes, Integer rating) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -61,6 +64,7 @@ public class Recette {
 		this.process = process;
 		this.ingredients = ingredients;
 		this.themes = themes;
+		this.rating = rating;
 	}
 
 	public Long getId() {
@@ -119,10 +123,23 @@ public class Recette {
 		this.version = version;
 	}
 
+	public Integer getRating() {
+		return rating;
+	}
+
+	public void setRating(Integer rating) {
+		if (rating <0 || rating >5) {
+			throw new RuntimeException("la notation doit etre entre 0 et 5");
+		} else {
+		this.rating = rating;
+		}
+	}
+
 	@Override
 	public String toString() {
-		return "Recette [id = " + this.getId() + ", nom = " + this.getNom() + ", nombre de convives = " + this.getnbConvives() + ", process = " + this.getProcess()
-				+ ", ingrédients =" + this.getIngredients() + ", thèmes = " + this.getThemes() + "]";
+		return "Recette [id=" + id + ", version=" + version + ", nom=" + nom + ", nbConvives=" + nbConvives
+				+ ", process=" + process + ", ingredients=" + ingredients + ", themes=" + themes + ", rating=" + rating
+				+ "]";
 	}
 
 	@Override
@@ -134,6 +151,7 @@ public class Recette {
 		result = prime * result + ((nbConvives == null) ? 0 : nbConvives.hashCode());
 		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
 		result = prime * result + ((process == null) ? 0 : process.hashCode());
+		result = prime * result + ((rating == null) ? 0 : rating.hashCode());
 		result = prime * result + ((themes == null) ? 0 : themes.hashCode());
 		result = prime * result + version;
 		return result;
@@ -173,6 +191,11 @@ public class Recette {
 				return false;
 		} else if (!process.equals(other.process))
 			return false;
+		if (rating == null) {
+			if (other.rating != null)
+				return false;
+		} else if (!rating.equals(other.rating))
+			return false;
 		if (themes == null) {
 			if (other.themes != null)
 				return false;
@@ -182,5 +205,6 @@ public class Recette {
 			return false;
 		return true;
 	}
+
 	
 }
